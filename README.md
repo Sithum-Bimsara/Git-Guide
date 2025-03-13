@@ -12,12 +12,17 @@ A **Version Control System (VCS)** is a tool that helps developers track changes
      - **Subversion (SVN)** 🏛️
      - **Team Foundation Server (TFS)** 💼
 
+![Image](assets/img2.png)
+
+
 2. **Distributed Version Control Systems (DVCS)**
    - Each developer has a full copy of the repository on their local machine.
    - No dependency on a central server; multiple copies ensure backup and flexibility.
    - Examples:
      - **Git** 🏆
      - **Mercurial** 🚀
+
+![Image](assets/img3.png)
 
 ## 🎯 Why is Git So Popular?
 Git is widely used due to several key advantages:
@@ -65,6 +70,9 @@ git config --global -e
 ```
 This will open your global configuration file for editing.
 
+![Image](assets/img1.png)
+
+
 ## 🔍 Levels of Git Configuration
 Git settings are applied at different levels:
 1. **System Level** 🏢 (Applies to all users on the machine)
@@ -72,11 +80,76 @@ Git settings are applied at different levels:
 3. **Local Level** 📂 (Applies only to the current repository)
 
 ## 📝 Handling Line Endings in Different Operating Systems
-### ⚠️ What are Line Endings?
-- **Windows:** Uses `\r\n` (Carriage Return + Line Feed)
-- **macOS/Linux:** Uses `\n` (Line Feed only)
+## 🔹 What are Line Endings?
+Line endings refer to the special characters that indicate the end of a line in a text file. Different operating systems use different conventions:
 
-Different line endings can cause issues when collaborating across OS. Git helps by converting line endings automatically.
+- **🖥️ Windows:** Uses `\r\n` (Carriage Return + Line Feed)
+- **🍎 macOS/Linux:** Uses `\n` (Line Feed only)
+
+These differences can cause issues when sharing files across different operating systems, especially in version control systems like Git.
+
+
+## 📂 Example: Line Endings Across Different Operating Systems
+
+### **📄 Scenario 1: File Created on Windows**
+If you create a file `example.txt` on Windows and write:
+
+```
+Hello, World!
+This is a test file.
+```
+
+Behind the scenes, the file is stored like this (with `\r\n` at the end of each line):
+
+```
+Hello, World!\r\n
+This is a test file.\r\n
+```
+
+### **📄 Scenario 2: File Opened on Linux/macOS**
+When the same file is opened on a Linux/macOS system, it may be interpreted differently because Linux expects only `\n` for line endings. If the system doesn’t handle `\r\n` properly, you might see something like:
+
+```
+Hello, World!^M
+This is a test file.^M
+```
+(`^M` represents the extra `\r` character.)
+
+This can cause issues in scripts, compilers, or version control.
+
+---
+
+## ⚙️ How Git Handles Line Endings
+Git automatically converts line endings based on your system and settings to prevent issues.
+
+### **🛠️ Configuring Git to Handle Line Endings**
+
+#### **🖥️ For Windows Users**
+Run the following command to configure Git:
+```sh
+git config --global core.autocrlf true
+```
+- ✅ Git will **convert `\n` to `\r\n` when checking out** files.
+- ✅ Git will **convert `\r\n` back to `\n` when committing**.
+
+#### **🍎 For Linux/macOS Users**
+Run the following command:
+```sh
+git config --global core.autocrlf input
+```
+- ✅ Git will **convert `\r\n` to `\n` when committing**, but won’t change anything on checkout.
+
+
+![Image](assets/img4.png)
+
+---
+
+## 🎯 Conclusion
+Different line endings can cause issues when switching between operating systems. Git helps by normalizing line endings based on your settings, preventing unnecessary changes in repositories. Configuring Git properly ensures a smooth workflow when working across different environments.
+
+Would you like more details or help setting up Git for your project? 😊
+
+
 
 ### 🛠️ Configuring Git to Handle Line Endings
 - **For Windows:**
