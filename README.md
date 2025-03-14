@@ -173,6 +173,8 @@ Git follows a structured workflow to track changes efficiently. The process invo
 2. **Staging Area (Index)** 🗂️ - Where changes are added before committing.
 3. **Repository** 🏛️ - Where committed changes are permanently stored.
 
+![Image](assets/img5.png)
+
 ### 🛠️ Adding and Committing Changes
 ```sh
 git add file1 file2
@@ -314,7 +316,10 @@ Changes to be committed:
 ```sh
 git commit
 ```
-✍️ Opens a text editor (VS Code, Vim, etc.) to enter a descriptive commit message.
+✍️ This command opens a text editor (VS Code, Vim, etc.) to enter a descriptive commit message.
+
+![Image](assets/img5.png)
+
 ```
 [master cdab869] A short description.
  1 file changed, 1 insertion(+)
@@ -323,5 +328,355 @@ git commit
 ---
 🎉 **Now you understand the full Git workflow!** 🚀
 
+# 🛠️ Git Scenarios and Command Guide
+
+## 🎯 Skipping the Staging Area
+
+### Command:
+```bash
+echo test >> file1.txt
+```
+
+This appends "test" to `file1.txt`.
+
+### Command:
+```bash
+git commit -a -m "Fix the bug"
+```
+
+### Alternative Command:
+```bash
+git commit -am "Fix the bug"
+```
+
+### Result:
+```
+[master b0a24b1] Fix the bug
+ 1 file changed, 1 insertion(+)
+```
+
+### ✅ What's happening:
+The `-a` flag automatically stages and commits all tracked files, skipping the staging area.
+
+---
+
+## 🗑️ Removing Files
+
+### On Windows:
+```bash
+del file2.txt
+```
+
+### On Linux/macOS:
+```bash
+rm file2.txt
+```
+
+### Check Status:
+```bash
+git status
+```
+
+### Output:
+```
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    file2.txt
+```
+
+### Check Files:
+```bash
+git ls-files
+```
+
+### Output:
+```
+file1.txt
+file2.txt
+```
+
+### Stage the Deletion:
+```bash
+git add file2.txt
+```
+
+### Verify Staged Changes:
+```bash
+git ls-files
+```
+### Output:
+```
+file1.txt
+```
+
+### Commit the Deletion:
+```bash
+git commit -m "Remove file2.txt"
+```
+
+### ✅ Alternative Approach to delete in one go both working directory and staging area:
+```bash
+git rm file2.txt
+```
+
+### Output:
+```
+rm 'file2.txt'
+```
+
+### Commit:
+```bash
+git commit -m "Remove file2.txt"
+```
+
+```bash
+dir
+```
+
+### Output:
+```
+03/14/2025  02:45 PM    <DIR>          .
+03/14/2025  02:45 PM    <DIR>          ..
+               0 File(s)              0 bytes
+               2 Dir(s)   8,479,490,048 bytes free
+```
+
+As you can see no files in the working directory.
+
+```bash
+git status
+```
+### Output:
+
+```
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        deleted:    file1.txt
+```
+---
+
+## 🔄 Scenario 3: Renaming Files
+
+### On Windows:
+```bash
+rename file1.txt main.js
+```
+
+### On Linux/macOS:
+```bash
+mv file1.txt main.js
+```
+
+### Check Status:
+```bash
+git status
+```
+
+### Output:
+
+```
+On branch master
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    file1.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        main.js
+```
+
+
+### Stage the Changes:
+```bash
+git add file1.txt main.js
+```
+
+```bash
+git status
+```
+
+### Output:
+
+```
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        renamed:    file1.txt -> main.js
+```
+Then git will identify this as a file renaming.
+
+
+### Commit the Changes:
+```bash
+git commit -m "Refactor code"
+```
+
+### ✅ Alternative Approach to directly rename a file both working directory and staging area in one go:
+```bash
+git mv main.js file1.txt
+```
+
+```bash
+git status
+```
+### Output:
+
+```
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        renamed:    main.js -> file1.txt
+```
+
+---
+
+## 🛑 Ignoring Files
+
+### Create Directory and File:
+```bash
+mkdir logs
+```
+```bash
+echo "hello" > logs/dev.log
+```
+
+### Check Status:
+```bash
+git status
+```
+### Output:
+
+```
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        logs/
+
+nothing added to commit but untracked files present (use "git add" to track)
+```
+
+
+### Add to .gitignore:
+```bash
+echo logs/ > .gitignore
+```
+
+![Image](assets/img6.png)
+
+### Stage and Commit:
+```bash
+git add .gitignore
+```
+```bash
+git commit -m "Add gitignore"
+```
+
+---
+
+## 🚫 Removing an Unwanted Staged File
+
+When we accidently add a unwanted file into staging area, we should have to remove it from staging area too, otherwise if we add that file to .gitignore that files also will be go to staging area, although that file name also included in .gitignore.
+
+### Create a Directory and a File:
+```bash
+mkdir bin
+```
+```bash
+echo "hello" > bin/app.bin
+```
+
+### Add and Commit the File:
+```bash
+git add .
+```
+```bash
+git commit -m "Add bin"
+```
+
+### Add to .gitignore:
+```bash
+echo bin/ > .gitignore
+```
+
+```bash
+git commit -m "Include bin directory to .gitignore"
+```
+
+```bash
+echo hellworld >> bin\app.bin()
+```
+
+```bash
+git status
+```
+
+### Output:
+
+```
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   bin/app.bin
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+**As you can see the above output our intension was not completed yet, If we want to don't add the changes we make to bin folder to staging area , git is still tracking that folder.**
+
+```bash
+git ls-files
+```
+
+### Output:
+
+```
+.gitignore
+bin/app.bin
+file1.txt
+logs/dev.log
+```
+
+### Remove that bin directory Staging Area:
+```bash
+git rm --cached -r bin/
+```
+
+```bash
+git ls-files
+```
+
+### Output:
+
+```
+.gitignore
+file1.txt
+logs/dev.log
+```
+
+```bash
+git status
+```
+
+
+### Output:
+
+```
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        deleted:    bin/app.bin
+```
+
+### Commit the Removal:
+```bash
+git commit -m "Remove the bin directory that was accidentally committed"
+```
+
+---
+
+🎉 **Now you've mastered these essential Git scenarios!**
 
 
