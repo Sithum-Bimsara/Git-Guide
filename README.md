@@ -430,6 +430,8 @@ rm 'file2.txt'
 git commit -m "Remove file2.txt"
 ```
 
+### View working directory
+
 ```bash
 dir
 ```
@@ -494,6 +496,8 @@ Untracked files:
 git add file1.txt main.js
 ```
 
+### Check status
+
 ```bash
 git status
 ```
@@ -518,6 +522,8 @@ git commit -m "Refactor code"
 ```bash
 git mv main.js file1.txt
 ```
+
+### Check status
 
 ```bash
 git status
@@ -605,9 +611,13 @@ echo bin/ > .gitignore
 git commit -m "Include bin directory to .gitignore"
 ```
 
+### Append "helloworld" to app.bin
+
 ```bash
 echo hellworld >> bin\app.bin()
 ```
+
+### View status
 
 ```bash
 git status
@@ -625,6 +635,8 @@ Changes not staged for commit:
 no changes added to commit (use "git add" and/or "git commit -a")
 ```
 **As you can see the above output our intension was not completed yet, If we want to don't add the changes we make to bin folder to staging area , git is still tracking that folder.**
+
+### View files in staging area
 
 ```bash
 git ls-files
@@ -644,6 +656,8 @@ logs/dev.log
 git rm --cached -r bin/
 ```
 
+### View files in staging area
+
 ```bash
 git ls-files
 ```
@@ -655,6 +669,8 @@ git ls-files
 file1.txt
 logs/dev.log
 ```
+
+### View status
 
 ```bash
 git status
