@@ -176,7 +176,7 @@ Git follows a structured workflow to track changes efficiently. The process invo
 2. **Staging Area (Index)** 🗂️ - Where changes are added before committing.
 3. **Repository** 🏛️ - Where committed changes are permanently stored.
 
-![Image](assets/img5.png)
+![Image](assets/img7.png)
 
 ### 🛠️ Adding and Committing Changes
 ```sh
