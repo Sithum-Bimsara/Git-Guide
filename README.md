@@ -164,6 +164,9 @@ Different line endings can cause issues when switching between operating systems
 
 ---
 💡 Now you're ready to start using Git efficiently! 🚀
+
+---
+
 # 🚀 Git Workflow Explained
 
 ## 🔄 Understanding the Git Workflow
@@ -459,7 +462,7 @@ Changes to be committed:
 ```
 ---
 
-## 🔄 Scenario 3: Renaming Files
+## 🔄 Renaming Files
 
 ### On Windows:
 ```bash
