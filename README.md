@@ -934,6 +934,141 @@ git restore --source=HEAD~1 file1.js
 ---
 🛠️ This guide covers essential Git operations to help you manage your project efficiently! 🚀
 
+## Git Log Analysis and Filtering 🚀
+
+This guide provides a comprehensive understanding of Git log commands and their outputs, ensuring a clear and structured approach to Git history tracking.
+
+---
+
+### 🔍 Viewing Git History
+
+#### `git log`
+
+**Output:**
+```
+commit 16eab60108a23d7adb5004fc2d18285db0fa2a70 (HEAD -> master)
+Author: Sithum Bimsara <sithim.22@cse.mrt.ac.lk>
+Date:   Sat Mar 15 11:51:35 2025 +0530
+
+    Hello Sithum World added
+
+commit 14f4275fd928bbf5f06b918496461a05ba506419
+Author: Sithum Bimsara <sithim.22@cse.mrt.ac.lk>
+Date:   Sat Mar 15 11:49:58 2025 +0530
+
+    Deleted all
+```
+
+📌 **Explanation:**
+- Displays the commit history in full detail.
+- Each commit includes a **commit hash**, **author**, **date**, and **commit message**.
+
+---
+
+#### `git log --oneline`
+
+**Output:**
+```
+16eab60 (HEAD -> master) Hello Sithum World added
+14f4275 Deleted all
+da3d1b1 2worlds added
+2164f63 File 1 changed
+6e3f757 File added
+```
+
+📌 **Explanation:**
+- Shows a summarized one-line version of the commit history.
+- The commit hash is shortened for better readability.
+
+---
+
+#### `git log --oneline --stat`
+
+**Output:**
+```
+16eab60 (HEAD -> master) Hello Sithum World added
+ file1.js | 3 +++
+ 1 file changed, 3 insertions(+)
+14f4275 Deleted all
+ file1.js | 9 ---------
+ file2.js | 3 +++
+ 2 files changed, 3 insertions(+), 9 deletions(-)
+```
+
+📌 **Explanation:**
+- Displays the number of files changed, insertions (`+`), and deletions (`-`) in each commit.
+
+---
+
+#### `git log --stat`
+
+**Output:**
+```
+commit 16eab60108a23d7adb5004fc2d18285db0fa2a70 (HEAD -> master)
+Author: Sithum Bimsara <sithim.22@cse.mrt.ac.lk>
+Date:   Sat Mar 15 11:51:35 2025 +0530
+
+    Hello Sithum World added
+
+ file1.js | 3 +++
+ 1 file changed, 3 insertions(+)
+```
+
+📌 **Explanation:**
+- Displays detailed commit history with file changes and statistics.
+
+---
+
+### 🔍 Filtering Git History
+
+#### `git log --oneline -3`
+- Shows the last **3 commits**.
+
+#### `git log --oneline --author="Sithum"`
+- Filters commits by **author**.
+
+#### `git log --oneline --after="2025-01-13"`
+- Displays commits made **after** a specific date.
+
+#### `git log --oneline --grep="File"`
+- Filters commits with a **case-sensitive** search in messages.
+
+#### `git log --oneline -S"hello"`
+- Displays commits that have **added or removed** "hello".
+
+#### `git log --oneline file1.js`
+- Shows commit history for **file1.js** only.
+
+---
+
+### 🎨 Formatting the Log Output
+
+#### `git log --pretty=format:"%an commited %h on %cd"`
+
+**Output:**
+```
+Sithum Bimsara commited 16eab60 on Sat Mar 15 11:51:35 2025 +0530
+Sithum Bimsara commited 14f4275 on Sat Mar 15 11:49:58 2025 +0530
+```
+
+📌 **Explanation:**
+- Custom formatting using `%an` (author), `%h` (short hash), and `%cd` (commit date).
+
+---
+
+### 🎨 Adding Colors
+
+#### `git log --pretty=format:"%Cgreen%an%Creset commited %h on %cd"`
+
+📌 **Explanation:**
+- Adds **green** color to the author name for better readability.
+
+---
+
+This guide provides a structured approach to exploring Git history efficiently! 🚀
+
+
+
 
 
 ---
