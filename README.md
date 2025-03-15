@@ -694,6 +694,248 @@ Changes to be committed:
 git commit -m "Remove the bin directory that was accidentally committed"
 ```
 
+# Git Guide with Explanation and Outputs 🚀
+
+## 1️⃣ Short Status (`git status -s`)
+
+### Output:
+```
+?? file0.js
+A  file1.js
+AM file2.js
+```
+### Explanation:
+- `??` → Untracked files (new files not yet added to Git)
+- `A` → Newly added file to staging
+- `AM` → A file that was added (`A`) and then modified (`M`) before committing
+- Red `M` → Modified file but not yet staged
+- Green `M` → Modified file that has been staged
+- Green `A` → Newly added file to the staging area
+
+## 2️⃣ Viewing Staged and Unstaged Files (`git diff` and `git diff --staged`)
+### `git diff --staged`
+
+#### Output:
+```
+diff --git a/file1.js b/file1.js
+index 7436f3f..6fdbffe 100644
+--- a/file1.js
++++ b/file1.js
+@@ -3,3 +3,5 @@ hello
+ hello
+ hello
+ hello
++hello
++hello
+```
+### Explanation:
+- `diff --git a/file1.js b/file1.js` → Shows differences between two versions of `file1.js`
+- `index 7436f3f..6fdbffe 100644` → SHA index of the file before and after
+- `--- a/file1.js` → Old version
+- `+++ b/file1.js` → New version
+- `@@ -3,3 +3,5 @@` → Context of the changes
+- `+hello` → New lines added
+
+### `git diff`
+#### Output:
+```
+index 6fdbffe..d29bf5e 100644
+--- a/file1.js
++++ b/file1.js
+@@ -5,3 +5,5 @@ hello
+ hello
+ hello
+ hello
++hello
++hello
+```
+### Explanation:
+- Shows changes in the working directory (unstaged changes)
+
+## 3️⃣ Diff Tools (KDiff3, P4Merge, WinMerge, VSCode)
+### Configuring VSCode as the Default Diff Tool
+```bash
+git config --global diff.tool vscode
+git config --global difftool.vscode.cmd "code --wait --diff $LOCAL $REMOTE"
+```
+```bash
+git config --global -e
+```
+
+### `git config --global -e` Output:
+```
+[user]
+	name = Sithum Bimsara
+	email = sithim.22@cse.mrt.ac.lk
+[core]
+	editor = code --wait
+	autocrlf = true
+[diff]
+	tool = vscode
+[difftool "vscode"]
+	cmd = code --wait --diff $LOCAL $REMOTE
+[safe]
+	directory = C:/Users/User/Desktop/projects/50+GenAIProjects
+```
+### Explanation:
+- `[user]` → User information
+- `[core]` → Default editor settings
+- `[diff]` → Specifies VSCode as the default diff tool
+- `[difftool "vscode"]` → Command to launch VSCode in diff mode
+
+## Visual Diff Tools
+
+ ```bash
+git difftool
+```
+🔹 Purpose:
+
+Compares the working directory with the latest committed version (HEAD).
+Opens an external diff tool (e.g., VS Code, Meld, Beyond Compare).
+
+🔹 Example Usage:
+
+If you modified file1.txt but haven't committed it yet, running:
+
+```bash
+git difftool
+```
+
+will open file1.txt in your configured diff tool, showing changes against the last committed version.
+
+ ```bash
+git difftool --staged
+```
+
+🔹 Purpose:
+
+Compares staged changes (added with git add) against the last committed version.
+Useful for reviewing changes before committing.
+
+🔹 Example Usage:
+
+Modify a file:
+
+```bash
+echo "sky" >> file1.txt
+echo "ocean" >> file1.txt
+```
+
+Stage it:
+```bash
+git add file1.txt
+```
+
+Run:
+```bash
+git difftool --staged
+```
+This shows differences between staged changes and the last commit.
+
+![Image](assets/img9.png)
+
+
+## 4️⃣ Viewing History
+### `git log`
+#### Output:
+```
+commit 2164f6310e417ad5e988be02814e268f515683e2 (HEAD -> master)
+Author: Sithum Bimsara <sithim.22@cse.mrt.ac.lk>
+Date:   Sat Mar 15 09:10:29 2025 +0530
+
+    File 1 changed
+
+commit 6e3f75779d40f821b5a831845e51d2e1dff1b918
+Author: Sithum Bimsara <sithim.22@cse.mrt.ac.lk>
+Date:   Sat Mar 15 09:06:24 2025 +0530
+
+    File added
+```
+### Explanation:
+- `commit <hash>` → Unique ID of the commit
+- `HEAD -> master` → Current branch
+- `Author` → Committer's details
+- `Date` → Timestamp of the commit
+- `Message` → Short description of the commit
+
+### `git log --oneline`
+
+### Explanation:
+- Displays commits in a compact format
+
+#### Output:
+```
+2164f63 (HEAD -> master) File 1 changed
+6e3f757 File added
+```
+
+
+## 5️⃣ Viewing a Commit
+### `git show d601b90`
+- Shows detailed information about a specific commit
+
+### `git show HEAD`
+- Shows the latest commit
+
+### `git show HEAD~1`
+- Shows the commit before the latest one
+
+### `git ls-tree HEAD~1`
+- Lists files and directories in a previous commit
+
+## 6️⃣ Git Objects
+
+**Git is a distributed version control system that stores data as a series of objects in a repository's .git/objects directory. These objects help track changes efficiently.**
+
+Git objects include:
+- **Commits** → Record of changes
+- **Blobs** → Store file content
+- **Trees** → Store directory structures
+- **Tags** → References to specific commits
+
+## 7️⃣ Unstaging Files (`git restore`)
+
+### Explanation:
+- Moves files from staging to the working directory
+
+
+### Commands:
+```bash
+git restore --staged file1.js
+git restore --staged file1.js file2.txt
+git restore --staged *.txt
+git restore --staged .
+git status -s
+```
+
+
+## 8️⃣ Discarding Local Changes
+### Commands:
+```bash
+git restore file1.js
+git restore .
+git status -s
+git clean -fd
+git status -s
+```
+### Explanation:
+- `git restore file1.js` → Discards changes in `file1.js`
+- `git restore .` → Discards all changes
+- `git clean -fd` → Removes untracked files and directories
+
+## 9️⃣ Restoring a File to an Earlier Version
+### Command:
+```bash
+git restore --source=HEAD~1 file1.js
+```
+### Explanation:
+- Restores `file1.js` to its previous commit version
+
+---
+🛠️ This guide covers essential Git operations to help you manage your project efficiently! 🚀
+
+
+
 ---
 
 🎉 **Now you've mastered these essential Git scenarios!**
