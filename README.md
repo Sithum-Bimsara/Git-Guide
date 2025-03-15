@@ -694,7 +694,7 @@ Changes to be committed:
 git commit -m "Remove the bin directory that was accidentally committed"
 ```
 
-# Git Guide with Explanation and Outputs 🚀
+--------------
 
 ## 1️⃣ Short Status (`git status -s`)
 
