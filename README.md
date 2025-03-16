@@ -1241,6 +1241,143 @@ M       file2.js
 
 🎉 With these commands, you can efficiently navigate Git history, track changes, and optimize your workflow! 🚀
 
+# 🧐 Understanding Detached HEAD in Git
+
+## 🛤️ Viewing the Complete Snapshot of a Commit
+
+When working with Git, sometimes you want to view the complete snapshot of your project at a specific point in time. This is done by checking out a given commit. This action restores your working directory to the snapshot stored in that commit, allowing you to see how your project looked at that moment.
+
+### 🎯 Command to Checkout a Commit
+```bash
+# Copy the commit ID from the log
+$ git log
+
+# Run the checkout command
+$ git checkout <commit-id>
+```
+
+📌 Output
+
+```
+Note: switching to '14f4275'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at 14f4275 Deleted all
+```
+
+
+### ⚠️ Warning: Detached HEAD State
+When you check out a commit, Git warns you that you are in a **detached HEAD state**. This sounds intimidating, but it’s actually simple.
+
+
+**Now you use `git log --online` you only can view only the changes before the above commit.
+
+📌 Output
+
+```
+14f4275 (HEAD) Deleted all
+da3d1b1 2worlds added
+2164f63 File 1 changed
+6e3f757 File added
+```
+
+### 📋 To View All Commits (Including Hidden Ones)
+```bash
+$ git log --oneline --all
+```
+
+📌 Output
+
+```
+4ce9343 (master) All commited
+df9b461 James added to file2
+befda4c Bimsara added to file1
+16eab60 Hello Sithum World added
+14f4275 (HEAD) Deleted all
+da3d1b1 2worlds added
+2164f63 File 1 changed
+6e3f757 File added
+```
+**But as you can see in the output **HEAD** and **master** are seperated. 
+
+## 🌳 Git’s Commit Structure
+- Each commit points to the previous commit, forming a chain.
+
+![Image](assets/Screenshot(10809).png)
+
+- These commits are part of the **master branch**, the main line of work.
+
+![Image](assets/Screenshot(108010).png)
+
+- Git represents branches using a pointer. For example, the **master pointer** points to the latest commit.
+- The **HEAD pointer** tells Git which branch you're currently working on.
+
+![Image](assets/Screenshot(108013).png)
+
+### 🛤️ How HEAD Works
+- When you create new commits, both the **master pointer** and **HEAD pointer** move forward.
+
+![Image](assets/Screenshot(108015).png)
+
+![Image](assets/Screenshot(108016).png)
+
+- When you check out a specific commit, the **HEAD pointer** moves to that commit, but it’s no longer attached to any branch. This is called the **detached HEAD state**.
+
+## 🧐 What Happens in Detached HEAD State?
+- You can view the code at that point in time.
+- ❌ **Do NOT create new commits** because those commits will be **unreachable** and eventually deleted by Git to save space.
+
+### 🛑 Why Shouldn't You Create Commits?
+If you create a new commit in the detached HEAD state:
+- The commit is not part of any branch.
+- It becomes a **dangling commit** and will be deleted by Git during garbage collection.
+
+![Image](assets/Screenshot(108021).png)
+
+## 🧐 How to Return to Normal State?
+To exit the detached HEAD state and return to the master branch:
+```bash
+$ git checkout master
+```
+
+### 📋 Viewing All Commits (Including Hidden Ones)
+```bash
+$ git log --oneline --all
+```
+
+### 🎯 Visual Representation
+```
+master ----> commit1 ----> commit2 ----> commit3 ----> commit4 (HEAD)
+```
+
+## 🌟 Summary
+| Action                        | State                   |
+|--------------------------------|---------------------|
+| Checkout a commit             | Detached HEAD        |
+| Create new commits            | Risk of losing them |
+| Return to master branch       | `git checkout master` |
+| View all commits              | `git log --oneline --all` |
+
+✅ **Key Takeaway:** Use detached HEAD to explore past code, not to make changes!
+
+🎉 Happy coding!
+
+
+
 
 
 
