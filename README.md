@@ -1317,23 +1317,23 @@ da3d1b1 2worlds added
 ## 🌳 Git’s Commit Structure
 - Each commit points to the previous commit, forming a chain.
 
-![Image](assets/Screenshot(10809).png)
+![Image](assets/img10.png)
 
 - These commits are part of the **master branch**, the main line of work.
 
-![Image](assets/Screenshot(108010).png)
+![Image](assets/img11.png)
 
 - Git represents branches using a pointer. For example, the **master pointer** points to the latest commit.
 - The **HEAD pointer** tells Git which branch you're currently working on.
 
-![Image](assets/Screenshot(108013).png)
+![Image](assets/img12.png)
 
 ### 🛤️ How HEAD Works
 - When you create new commits, both the **master pointer** and **HEAD pointer** move forward.
 
-![Image](assets/Screenshot(108015).png)
+![Image](assets/img13.png)
 
-![Image](assets/Screenshot(108016).png)
+![Image](assets/img14.png)
 
 - When you check out a specific commit, the **HEAD pointer** moves to that commit, but it’s no longer attached to any branch. This is called the **detached HEAD state**.
 
@@ -1346,7 +1346,7 @@ If you create a new commit in the detached HEAD state:
 - The commit is not part of any branch.
 - It becomes a **dangling commit** and will be deleted by Git during garbage collection.
 
-![Image](assets/Screenshot(108021).png)
+![Image](assets/img15.png)
 
 ## 🧐 How to Return to Normal State?
 To exit the detached HEAD state and return to the master branch:
