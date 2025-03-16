@@ -1075,4 +1075,173 @@ This guide provides a structured approach to exploring Git history efficiently! 
 
 🎉 **Now you've mastered these essential Git scenarios!**
 
+# 📌 View Commits
+
+## 🔗 Creating Git Aliases
+Git aliases allow us to create shortcuts for commonly used commands.
+
+### 🔹 Define a new alias
+```bash
+git config --global alias.lg "log --pretty=format:'%an committed %h'"
+```
+✅ This command sets `git lg` as a shortcut for viewing commit logs in a compact format, displaying the author's name and commit hash.
+
+### 🔹 Using the alias
+```bash
+git lg
+```
+📌 Output:
+```
+Sithum Bimsara committed 16eab60
+Sithum Bimsara committed 14f4275
+Sithum Bimsara committed da3d1b1
+Sithum Bimsara committed 2164f63
+Sithum Bimsara committed 6e3f757
+```
+
+### 🔹 Alias for unstaging changes
+```bash
+git config --global alias.unstage "restore --staged ."
+```
+✅ Now we can use `git unstage` instead of `git restore --staged .` to unstage files easily.
+
+---
+
+## 🔍 Viewing a Specific Commit
+
+### 🔹 Show commit details
+```bash
+git show HEAD~2
+```
+✅ This command moves two commits back from the latest commit (HEAD) and shows the details.
+
+### 🔹 Show specific file in a commit
+```bash
+git show HEAD~2:path/to/file
+```
+✅ This command shows the state of a specific file at a commit two steps back.
+
+📌 **How to declare the path?**
+- The path should be relative to the Git repository root.
+- Example:
+```bash
+git show HEAD~2:src/index.js
+```
+
+### 🔹 Show only filenames changed in a commit
+```bash
+git show HEAD~2 --name-only
+```
+📌 Output:
+```
+commit 14f4275fd928bbf5f06b918496461a05ba506419
+Author: Sithum Bimsara <sithim.22@cse.mrt.ac.lk>
+Date:   Sat Mar 15 11:49:58 2025 +0530
+
+    Deleted all
+
+file1.js
+file2.js
+```
+
+### 🔹 Show filenames with their statuses
+```bash
+git show HEAD~2 --name-status
+```
+📌 Output:
+```
+commit 14f4275fd928bbf5f06b918496461a05ba506419
+Author: Sithum Bimsara <sithim.22@cse.mrt.ac.lk>
+Date:   Sat Mar 15 11:49:58 2025 +0530
+
+    Deleted all
+
+M       file1.js
+M       file2.js
+```
+ℹ️ `M` means the file was modified.
+
+---
+
+## 🔄 Viewing Changes Across Commits
+
+### 🔹 Show differences between commits
+```bash
+git diff HEAD~2 HEAD
+```
+📌 Output:
+```
+diff --git a/file1.js b/file1.js
+index 470dc38..39db52e 100644
+--- a/file1.js
++++ b/file1.js
+@@ -1,3 +1,4 @@
+ Hello
+ Sithum
+-World
+\ No newline at end of file
++World
++Bimsara
+\ No newline at end of file
+
+diff --git a/file2.js b/file2.js
+index 8daf0ad..2e4eee7 100644
+--- a/file2.js
++++ b/file2.js
+@@ -3,3 +3,4 @@
+ world
+ world
+ hello
+ hello
++James
+```
+
+### 🔹 Show changes of a specific file
+```bash
+git diff HEAD~2 HEAD file1.js
+```
+📌 Output:
+```
+diff --git a/file1.js b/file1.js
+index 470dc38..39db52e 100644
+--- a/file1.js
++++ b/file1.js
+@@ -1,3 +1,4 @@
+ Hello
+ Sithum
+-World
+\ No newline at end of file
++World
++Bimsara
+\ No newline at end of file
+```
+
+### 🔹 Show only filenames of changed files
+```bash
+git diff HEAD~2 HEAD --name-only
+```
+📌 Output:
+```
+file1.js
+file2.js
+```
+
+### 🔹 Show filenames with statuses
+```bash
+git diff HEAD~2 HEAD --name-status
+```
+📌 Output:
+```
+M       file1.js
+M       file2.js
+```
+✅ `M` indicates the files were modified.
+
+---
+
+🎉 With these commands, you can efficiently navigate Git history, track changes, and optimize your workflow! 🚀
+
+
+
+
 
