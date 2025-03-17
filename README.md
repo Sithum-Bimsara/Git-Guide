@@ -1374,7 +1374,185 @@ master ----> commit1 ----> commit2 ----> commit3 ----> commit4 (HEAD)
 
 ✅ **Key Takeaway:** Use detached HEAD to explore past code, not to make changes!
 
-🎉 Happy coding!
+## 🛠 Finding Contributions
+
+### 🔍 Checking Individual Contributions
+
+Git provides the `git shortlog` command to summarize contributions made by each author. Here’s an example:
+
+```bash
+git shortlog
+```
+
+### 📜 Sample Output:
+```bash
+Sithum-Bimsara (4):
+      Create README.md
+      Update README.md
+      Merge pull request #19 from Sithum-Bimsara/feature/backend/v1
+      Merge pull request #21 from Sithum-Bimsara/front-end
+
+Dulitha Perera (3):
+      Merge pull request #1 from Sithum-Bimsara/feature/backend/v1
+      Add functions to feedback model
+      Fix an error and create feedback controller
+
+Sasmitha Uvindu Jayasinghe (3):
+      Started creating front end
+      Merge pull request #11 from Sithum-Bimsara/feature/backend/v1
+      updated the header
+```
+
+### 📊 Counting Contributions by Authors
+
+```bash
+git shortlog -n -s
+```
+
+### 📜 Output:
+```bash
+   17  Sithum Bimsara
+   13  Sasmitha Uvindu Jayasinghe
+    8  Dulitha Perera
+```
+
+The `-n` option sorts authors by the number of commits, and `-s` shows only the commit count.
+
+---
+
+## 🔄 Restoring a Deleted File
+
+If you accidentally delete a file in Git, you can restore it. Let’s see a real-world scenario:
+
+### 🗑 Deleting a File
+```bash
+git rm file1.js
+```
+
+### 📜 Output:
+```bash
+rm 'file1.js'
+```
+
+### 💾 Committing the Deletion
+```bash
+git commit -m "Remove file1.js"
+```
+
+### 🔍 Finding the Last Commit Containing the File
+```bash
+git log --oneline -- file1.js
+```
+
+### 📜 Output:
+```bash
+5f28a5d (HEAD -> master) Remove file1.js
+4ce9343 All committed
+...
+```
+
+### ♻ Restoring the File from a Previous Commit
+```bash
+git checkout 4ce9343 file1.js
+```
+
+### ✅ Committing the Restoration
+```bash
+git commit -m "Restore file1.js"
+```
+
+### 🎯 Final Check
+```bash
+git status
+```
+```bash
+On branch master
+nothing to commit, working tree clean
+```
+
+---
+
+## 🏷 Finding the Author of a Line (Blame)
+
+The `git blame` command helps identify who made changes to specific lines of a file.
+
+### 🔍 Checking Line-by-Line History
+```bash
+git blame file1.js
+```
+
+### 📜 Output:
+```bash
+76f9ff77 (Sithum Bimsara 2025-03-17 22:12:03 +0530 1) Hello
+76f9ff77 (Sithum Bimsara 2025-03-17 22:12:03 +0530 2) Sithum
+76f9ff77 (Sithum Bimsara 2025-03-17 22:12:03 +0530 3) World
+```
+
+You can also check with email details:
+```bash
+git blame -e file1.js
+```
+
+### 📜 Output:
+```bash
+76f9ff77 (<sithim.22@cse.mrt.ac.lk> 2025-03-17 22:12:03 +0530 1) Hello
+```
+
+---
+
+## 🏷 Git Tagging
+
+### 🔖 Creating a Lightweight Tag
+```bash
+git tag v1.0 14f4275
+```
+
+### 🔍 Viewing Tags
+```bash
+git tag
+```
+```bash
+v1.0
+```
+
+### 🔍 Viewing Tag Details
+```bash
+git show v1.0
+```
+
+### 🏷 Creating an Annotated Tag
+```bash
+git tag -a v1.1 -m "My version 1.1"
+```
+
+### 📜 Viewing Tags with Messages
+```bash
+git tag -n
+```
+```bash
+v1.0 Deleted all
+v1.1 My version 1.1
+```
+
+### 🚀 Checking Out a Tag
+```bash
+git checkout v1.0
+```
+
+### 🗑 Deleting a Tag
+```bash
+git tag -d v1.1
+```
+
+```bash
+Deleted tag 'v1.1' (was 464b228)
+```
+
+---
+
+This provides a comprehensive understanding of commonly used Git operations, making version control more efficient and reliable. 🚀
+
+
 
 
 
