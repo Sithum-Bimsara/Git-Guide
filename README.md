@@ -1554,6 +1554,174 @@ This provides a comprehensive understanding of commonly used Git operations, mak
 
 
 
+# Git Bisect: Finding Bugs Efficiently 🕵️‍♂️🐛
+
+## Introduction
+Git bisect is a powerful tool that helps developers quickly find the commit that introduced a bug in their application. Instead of checking out each commit manually, `git bisect` allows us to use a binary search algorithm to pinpoint the faulty commit efficiently.
+
+---
+
+## Commands & Console Output 🖥️
+
+### Checking the Commit History
+```sh
+git log --oneline
+```
+**Output:**
+```
+76f9ff7 (HEAD -> master) Restore file1.js
+5f28a5d Remove file1.js
+4ce9343 All commited
+df9b461 James added to file2
+befda4c Bimsara added to file1
+16eab60 Hello Sithum World added
+14f4275 (tag: v1.0) Deleted all
+da3d1b1 2worlds added
+2164f63 File 1 changed
+6e3f757 File added
+```
+👉 This command lists all commits in a compact format (one line per commit). The most recent commit appears at the top.
+
+---
+
+### Starting `git bisect`
+```sh
+git bisect start
+```
+**Output:**
+```
+status: waiting for both good and bad commits
+```
+🔍 This initializes the bisect process, setting up Git to find the commit where the bug was introduced.
+
+---
+
+### Marking the Current Commit as Bad ❌
+```sh
+git bisect bad
+```
+**Output:**
+```
+status: waiting for good commit(s), bad commit known
+```
+🚨 This tells Git that the current commit has a bug.
+
+---
+
+### Marking an Older Commit as Good ✅
+```sh
+git bisect good 6e3f757
+```
+**Output:**
+```
+Bisecting: 4 revisions left to test after this (roughly 2 steps)
+[16eab60108a23d7adb5004fc2d18285db0fa2a70] Hello Sithum World added
+```
+🕵️‍♂️ This tells Git that the commit `6e3f757` was before the bug appeared, helping it narrow down the search.
+
+---
+
+### Checking the Logs During Bisecting
+```sh
+git log --oneline
+```
+**Output:**
+```
+16eab60 (HEAD) Hello Sithum World added
+14f4275 (tag: v1.0) Deleted all
+da3d1b1 2worlds added
+2164f63 File 1 changed
+6e3f757 File added
+```
+🔍 This shows the current state of commits after the bisect operation.
+
+---
+
+### Narrowing Down Further 🚀
+```sh
+git bisect good
+```
+**Output:**
+```
+Bisecting: 2 revisions left to test after this (roughly 1 step)
+[df9b461e3b51bac8cbdbe680fd53f1ef02b44197] James added to file2
+```
+👉 This tells Git that this commit is still good, further narrowing down the range.
+
+---
+
+### Repeating the Process 🔄
+```sh
+git bisect good
+```
+**Output:**
+```
+Bisecting: 0 revisions left to test after this (roughly 1 step)
+[5f28a5d163868c446c64568c2da623796319035f] Remove file1.js
+```
+🔍 Now only one commit is left to check.
+
+---
+
+### Identifying the First Bad Commit 🚨
+```sh
+git bisect bad
+```
+**Output:**
+```
+Bisecting: 0 revisions left to test after this (roughly 0 steps)
+[4ce93435d5eac9900d11105771b863aff982ab84] All commited
+```
+👉 This confirms that the commit `4ce9343` introduced the bug.
+
+---
+
+### Resetting the Bisect Process 🔄
+```sh
+git bisect reset
+```
+**Output:**
+```
+Previous HEAD position was 4ce9343 All commited
+Switched to branch 'master'
+```
+✅ This restores the repository to its original state before the bisect operation.
+
+---
+
+## Explanation of `git bisect` 🧐
+
+1. **Start the Bisect Process**
+   - `git bisect start` initializes the bisect operation.
+   
+2. **Mark a Bad Commit** ❌
+   - `git bisect bad` tells Git the current commit has the bug.
+   
+3. **Mark a Good Commit** ✅
+   - `git bisect good <commit_hash>` tells Git where the bug was not present.
+   
+4. **Binary Search** 🔍
+   - Git will checkout a middle commit.
+   - You test if the bug is present.
+   - If the bug exists, mark it as `git bisect bad`.
+   - If the bug does not exist, mark it as `git bisect good`.
+   - Repeat until Git finds the first bad commit.
+
+5. **Identifying the Buggy Commit** 🛠️
+   - Git pinpoints the exact commit where the issue was introduced.
+
+6. **Reset to Normal State**
+   - `git bisect reset` brings the repository back to normal.
+
+---
+
+## Conclusion 🎯
+
+Using `git bisect`, we efficiently pinpointed the commit where the bug originated, saving time and effort compared to manually checking each commit. This technique is invaluable when debugging large projects.
+
+
+
+
 
 
 
