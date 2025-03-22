@@ -1756,6 +1756,10 @@ Git handles branches **differently** from other version control systems like Sub
 ---
 
 ## 🔀 How Git Handles Branches
+
+![Image](assets/img16.png)
+
+
 1. **Creating a Branch** 🆕
    - Git creates a new **pointer** that can move around.
    - This pointer is a **tiny file storing the commit ID**.
