@@ -2103,11 +2103,215 @@ M       audience.txt
 
 By using these commands, you can effectively review the changes in a branch before merging it into `master`. 🚀
 
+---
 
+# Git Stash Operations Explained 🚀
 
+## Introduction 📌
+When working with Git, sometimes we have local changes that we haven't committed yet, but we need to switch branches. Git prevents switching in such cases to avoid losing changes. In this guide, we will explore how to use Git Stash to temporarily save changes and retrieve them later.
 
 ---
 
+## Checking Branches 🌿
+To check which branches exist and which one we are currently on, we use:
+
+```bash
+$ git branch
+```
+
+**Output:**
+```
+  bugfix/signup-form
+* master
+```
+
+Here, `master` is the active branch (`*` indicates the current branch).
+
+---
+
+## Error When Switching Branches 🚨
+If we try to switch branches without committing or stashing local changes, we get an error:
+
+```bash
+$ git switch bugfix/signup-form
+```
+
+**Error Output:**
+```
+error: Your local changes to the following files would be overwritten by checkout:
+        audience.txt
+Please commit your changes or stash them before you switch branches.
+Aborting
+```
+
+Since we don’t want to commit the changes yet, we will **stash** them.
+
+---
+
+## Stashing Changes 🗂️
+To temporarily save changes, use the `git stash push` command:
+
+```bash
+$ git stash push -m "New tax rules"
+```
+
+**Output:**
+```
+Saved working directory and index state On master: New tax rules
+```
+
+---
+
+## Handling Untracked Files 📂
+By default, untracked files are not included in the stash. Let's create a new file:
+
+```bash
+$ echo hello > newfile.txt
+```
+
+Check the status:
+
+```bash
+$ git status -s
+```
+
+**Output:**
+```
+?? newfile.txt
+```
+
+To stash all files, including untracked ones:
+
+```bash
+$ git stash push -am "My new stash"
+```
+
+**Output:**
+```
+Saved working directory and index state On master: My new stash
+```
+
+---
+
+## Listing Stashed Changes 📜
+To view stored stashes:
+
+```bash
+$ git stash list
+```
+
+**Output:**
+```
+stash@{0}: On master: My new stash
+stash@{1}: On master: New tax rules
+```
+
+---
+
+## Switching Branches 🔄
+Now we can switch to another branch without losing changes:
+
+```bash
+$ git switch bugfix/signup-form
+```
+
+**Output:**
+```
+Switched to branch 'bugfix/signup-form'
+```
+
+We can switch back to `master` anytime:
+
+```bash
+$ git switch master
+```
+
+**Output:**
+```
+Switched to branch 'master'
+```
+
+---
+
+## Viewing Stashed Changes 👀
+Before applying a stash, check its contents:
+
+```bash
+$ git stash show stash@{1}
+```
+
+**Output:**
+```
+audience.txt | 2 +-
+1 file changed, 1 insertion(+), 1 deletion(-)
+```
+
+The same output can be obtained using:
+
+```bash
+$ git stash show 1
+```
+
+---
+
+## Applying a Stash 🛠️
+To apply a specific stash to the working directory:
+
+```bash
+$ git stash apply 1
+```
+
+**Output:**
+```
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   audience.txt
+```
+
+---
+
+## Removing a Stash 🗑️
+Once a stash is applied, we can delete it:
+
+```bash
+$ git stash drop 1
+```
+
+**Output:**
+```
+Dropped refs/stash@{1} (f92bb35ab1d8197db347e9fb3a47aee0b8221e3e)
+```
+
+To verify:
+
+```bash
+$ git stash list
+```
+
+**Output:**
+```
+stash@{0}: On master: My new stash
+```
+
+---
+
+## Clearing All Stashes 🧹
+To remove all stashes at once:
+
+```bash
+$ git stash clear
+```
+
+After this, running `git stash list` will return nothing.
+
+---
+
+## Conclusion 🎯
+Git Stash is a powerful tool that allows you to temporarily store changes and retrieve them later without committing. It helps in switching branches safely without losing work. Now you can confidently stash, apply, drop, and clear stashes in your projects! 🚀
+
+---
 
 
 
