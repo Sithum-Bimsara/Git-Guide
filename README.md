@@ -1783,6 +1783,194 @@ Git handles branches **differently** from other version control systems like Sub
 
 Throughout this section, you will learn everything needed to work with Git branches efficiently. 🚀
 
+----
+
+# Git Branch Management - Fixing a Bug 🐞
+
+## Introduction 📌
+Git is a powerful tool for version control, and managing branches effectively is a crucial skill. In this guide, we will walk through the process of creating, switching, renaming, modifying, and deleting branches while fixing a bug. We will also examine the necessary Git commands and their outputs to ensure a smooth workflow.
+
+---
+
+## Creating a New Branch 🌱
+When we receive a bug report, the best practice is to create a new branch to isolate the fix. We do this using:
+
+```bash
+$ git branch bugfix
+```
+
+### Checking Available Branches 🧐
+To list all branches and see the currently active branch:
+
+```bash
+$ git branch
+```
+
+**Output:**
+```
+  bugfix
+* master
+```
+The asterisk (*) indicates that we are on the `master` branch.
+
+---
+
+## Switching to the Bugfix Branch 🔄
+There are two ways to switch branches:
+
+1️⃣ Old method (deprecated but still works):
+```bash
+$ git checkout bugfix
+```
+
+2️⃣ New recommended method:
+```bash
+$ git switch bugfix
+```
+
+**Output:**
+```
+Switched to branch 'bugfix'
+```
+
+---
+
+## Renaming the Branch ✏️
+A generic name like `bugfix` is not very descriptive. It’s better to use something specific:
+
+```bash
+$ git branch -m bugfix bugfix/signup-form
+```
+
+**Output:**
+```
+Branch renamed to 'bugfix/signup-form'
+```
+
+---
+
+## Making Changes ✍️
+Let's open the file `audience.txt` and make some modifications.
+
+- Rename **"Audience"** to **"Who this course is for"**
+- Add a border to the text
+- Remove an unnecessary line
+
+After saving the changes, we check the status:
+
+```bash
+$ git status
+```
+
+**Output:**
+```
+On branch bugfix/signup-form
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+
+	modified:   audience.txt
+```
+
+---
+
+## Staging and Committing Changes ✅
+To stage the modified file:
+```bash
+$ git add audience.txt
+```
+
+To commit with a message:
+```bash
+$ git commit -m "Fix bug that prevented users from signing up"
+```
+
+**Output:**
+```
+[bugfix/signup-form 8f19a63] Fix bug that prevented users from signing up
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+```
+
+---
+
+## Checking the Commit Log 📜
+To see our commits in a compact format:
+
+```bash
+$ git log --oneline
+```
+
+**Output:**
+```
+8f19a63 (HEAD -> bugfix/signup-form) Fix bug that prevented users from signing up
+76f9ff7 Restore file1.js
+5f28a5d Remove file1.js
+```
+
+Notice that `HEAD` is pointing to `bugfix/signup-form`, meaning we are currently on this branch.
+
+---
+
+## Switching Back to Master 🔄
+Now, let’s go back to the `master` branch:
+
+```bash
+$ git switch master
+```
+
+**Output:**
+```
+Switched to branch 'master'
+```
+
+If we open `audience.txt` again, we’ll see the old version because our changes exist only in `bugfix/signup-form`.
+
+---
+
+## Viewing All Branch Commits 🕵️
+To see commits across all branches:
+```bash
+$ git log --oneline --all
+```
+
+---
+
+## Deleting the Bugfix Branch 🗑️
+Once we merge the `bugfix/signup-form` branch into `master`, we no longer need it.
+
+Attempting to delete it normally:
+```bash
+$ git branch -d bugfix/signup-form
+```
+**Output (error message if branch is not merged yet):**
+```
+error: The branch 'bugfix/signup-form' is not fully merged.
+```
+
+To force delete it:
+```bash
+$ git branch -D bugfix/signup-form
+```
+
+**Output:**
+```
+Deleted branch bugfix/signup-form (was 76f9ff7).
+```
+
+---
+
+## Conclusion 🎯
+In this guide, we learned how to:
+✅ Create and switch branches
+✅ Rename branches for better clarity
+✅ Make changes and commit them
+✅ View commit logs
+✅ Delete branches safely
+
+This workflow helps us maintain a clean and organized Git history while preventing accidental commits to the wrong branch. 🚀
+
+----
+
 
 
 
