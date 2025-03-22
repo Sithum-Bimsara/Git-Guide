@@ -1789,7 +1789,7 @@ Throughout this section, you will learn everything needed to work with Git branc
 
 ----
 
-# Git Branch Management - Fixing a Bug 🐞
+## Git Branch Management - Fixing a Bug 🐞
 
 ## Introduction 📌
 Git is a powerful tool for version control, and managing branches effectively is a crucial skill. In this guide, we will walk through the process of creating, switching, renaming, modifying, and deleting branches while fixing a bug. We will also examine the necessary Git commands and their outputs to ensure a smooth workflow.
@@ -1856,9 +1856,21 @@ Branch renamed to 'bugfix/signup-form'
 ## Making Changes ✍️
 Let's open the file `audience.txt` and make some modifications.
 
-- Rename **"Audience"** to **"Who this course is for"**
-- Add a border to the text
-- Remove an unnecessary line
+```
+Who are you?
+ 
+My name is Sithum Bimsara.
+I'm 22 years old.
+```
+
+to 
+
+```
+"Who are you?" 
+======================================  
+My name is Sithum Wickramanayake
+```
+
 
 After saving the changes, we check the status:
 
@@ -1937,6 +1949,23 @@ To see commits across all branches:
 $ git log --oneline --all
 ```
 
+**Output:**
+```
+99a39d7 (bugfix/signup-form) Fix the bug in signup
+c38d43f (HEAD -> master) Deleted audience.txt
+8f19a63 Audience.txt added
+76f9ff7 Restore file1.js
+5f28a5d Remove file1.js
+4ce9343 All commited
+df9b461 James added to file2
+befda4c Bimsara added to file1
+16eab60 Hello Sithum World added
+14f4275 (tag: v1.0) Deleted all
+da3d1b1 2worlds added
+2164f63 File 1 changed
+6e3f757 File added
+```
+
 ---
 
 ## Deleting the Bugfix Branch 🗑️
@@ -1973,6 +2002,7 @@ In this guide, we learned how to:
 
 This workflow helps us maintain a clean and organized Git history while preventing accidental commits to the wrong branch. 🚀
 
+---
 ----
 
 
