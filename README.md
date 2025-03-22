@@ -2003,7 +2003,110 @@ In this guide, we learned how to:
 This workflow helps us maintain a clean and organized Git history while preventing accidental commits to the wrong branch. 🚀
 
 ---
-----
+# 📌 Comparing Branches in Git
+
+## 🧐 Introduction
+When working with Git, it's crucial to compare branches before merging them into the main branch (e.g., `master`). In this guide, we’ll explore various ways to check how a branch differs from `master` using Git commands. 
+
+---
+
+## 🔍 Checking Commits in a Branch
+Before merging a branch, we need to identify the commits that exist in the feature or bugfix branch but not in `master`. We use the following command:
+
+```bash
+$ git log master..bugfix/signup-form
+```
+
+### 📝 Output:
+```bash
+commit fc89881a9248f431c31e97ed56e8091db8b99e3f (bugfix/signup-form)
+Author: Sithum Bimsara <sithim.22@cse.mrt.ac.lk>
+Date:   Sun Mar 23 02:06:47 2025 +0530
+
+    Changed audience.txt from bugfix/signup-form branch
+```
+
+### 🔎 Explanation:
+- This command lists all the commits in `bugfix/signup-form` that are **not** in `master`.
+- In this case, there is **one commit**, but if there were more, all of them would be listed.
+- The `master..bugfix/signup-form` syntax means: "Show me all commits in `bugfix/signup-form` that `master` doesn’t have."
+
+👉 If you want a more concise output, you can use:
+```bash
+$ git log --oneline master..bugfix/signup-form
+```
+
+---
+
+## 🛠 Viewing Code Changes
+If we want to see the actual file changes instead of just commit messages, we use:
+
+```bash
+$ git diff master..bugfix/signup-form
+```
+
+### 📝 Output:
+```diff
+diff --git a/audience.txt b/audience.txt
+index a9fd72c..1e80bad 100644
+--- a/audience.txt
++++ b/audience.txt
+@@ -1,7 +1,7 @@
+ Who are you?
++==========================
++My name is Sithum Wickramanayake
+
+-My name is Sithum Bimsara
+-I'm 22 years old
+```
+
+### 🔎 Explanation:
+- The `+` lines indicate new additions.
+- The `-` lines indicate removals.
+- This tells us that the `audience.txt` file has been modified: 
+  - The old name "Sithum Bimsara" was changed to "Sithum Wickramanayake".
+  - "I'm 22 years old" was removed.
+  
+👉 If we are currently on `master`, we can simplify the command:
+```bash
+$ git diff bugfix/signup-form
+```
+
+---
+
+## 📂 Checking Affected Files
+Sometimes, we don’t need to see the detailed changes, just the **list of modified files**. We use:
+
+```bash
+$ git diff --name-status bugfix/signup-form
+```
+
+### 📝 Output:
+```bash
+M       audience.txt
+```
+
+### 🔎 Explanation:
+- The `M` means the file **audience.txt** has been modified.
+- This helps quickly identify which files will be changed when merging the branch.
+
+---
+
+## 🎯 Summary
+| Command | Purpose |
+|---------|---------|
+| `git log master..branch` | Shows commits in `branch` but not in `master` |
+| `git log --oneline master..branch` | Shows commits in a compact format |
+| `git diff master..branch` | Shows line-by-line changes between `master` and `branch` |
+| `git diff branch` | Shorter version if on `master` |
+| `git diff --name-status branch` | Lists only the changed files |
+
+By using these commands, you can effectively review the changes in a branch before merging it into `master`. 🚀
+
+
+
+
+---
 
 
 
