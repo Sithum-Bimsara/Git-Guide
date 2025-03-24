@@ -2467,6 +2467,150 @@ Git looks at these three snapshots and decides how to combine them.
 
 ---
 
+# 📒 Git Notebook: Fast Forward & No Fast Forward Merges
+
+## 📌 Introduction
+This notebook covers the concepts of **Fast Forward (FF) Merges** and **No Fast Forward (No-FF) Merges** in Git. We will explore how these merge strategies work, their advantages and disadvantages, and how to configure them.
+
+---
+
+## 📌 Checking the Git Log with Graph Representation
+
+Before performing any merge operation, it's good practice to check the log with a graphical representation to see how branches diverge.
+
+```sh
+git log --oneline --all --graph
+```
+
+### 📌 Output:
+```
+* f76e273 (HEAD -> bugfix/signup-form) Fix the bug that protects users from signing up
+* 8797d0e (master) TOC.txt added
+* a2410e0 Audience.txt added
+* 68a073e File2 added
+* c43539f File1 added
+```
+🔍 **Observation:** The `bugfix/signup-form` branch is ahead of `master` by one commit.
+
+---
+
+## 📌 Performing a Fast Forward Merge
+
+Since `master` has not diverged from `bugfix/signup-form`, we can merge using a **Fast Forward Merge**.
+
+### **1️⃣ Switch to the `master` branch**
+```sh
+git switch master
+```
+**Output:**
+```
+Switched to branch 'master'
+```
+
+### **2️⃣ Merge `bugfix/signup-form` into `master`**
+```sh
+git merge bugfix/signup-form
+```
+**Output:**
+```
+Updating 8797d0e..f76e273
+Fast-forward
+ toc.txt | 1 +
+ 1 file changed, 1 insertion(+)
+```
+✅ **Fast Forward Merge Complete**: The `master` branch now points to `f76e273`, creating a linear history.
+
+---
+
+## 📌 Creating and Merging with No Fast Forward
+To disable Fast Forward merging and retain a merge commit, use `--no-ff`.
+
+### **1️⃣ Create and switch to a new branch**
+```sh
+git switch -C bugfix/login-form
+```
+**Output:**
+```
+Switched to a new branch 'bugfix/login-form'
+```
+
+### **2️⃣ Modify `toc.txt`, stage, and commit the changes**
+```sh
+code toc.txt
+git add toc.txt
+git commit -m "Update toc.txt"
+```
+**Output:**
+```
+[bugfix/login-form 8538e99] Update toc.txt
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+```
+
+### **3️⃣ Switch back to `master` and attempt a No Fast Forward Merge**
+```sh
+git switch master
+git merge --no-ff bugfix/login-form
+```
+**Output:**
+```
+Merge made by the 'ort' strategy.
+ toc.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+```
+
+### 📌 Checking the log again
+```sh
+git log --oneline --all --graph
+```
+**Output:**
+```
+*   ff8fcb1 (HEAD -> master) Merge branch 'bugfix/login-form'
+|\
+| * 8538e99 (bugfix/login-form) Update toc.txt
+|/
+* f76e273 (bugfix/signup-form) Fix the bug that protects users from signing up
+* 8797d0e TOC.txt added
+* a2410e0 Audience.txt added
+* 68a073e File2 added
+* c43539f File1 added
+```
+🔍 **Observation:**
+- A **merge commit (`ff8fcb1`)** is created.
+- The branch history is **not linear** due to the explicit merge commit.
+
+---
+
+## 📌 Fast Forward vs No Fast Forward: Which One to Use?
+
+| Merge Type       | Pros ✅ | Cons ❌ |
+|------------------|--------|---------|
+| **Fast Forward** | Keeps history linear 📜 | History may not reflect actual merging ⏳ |
+| **No Fast Forward** | Creates an explicit merge commit 📌 | More commits in history 📂 |
+
+🚀 **Key Takeaway:**
+- If you want a **cleaner** linear history, use **Fast Forward**.
+- If you want to **track merges explicitly**, use **No Fast Forward**.
+
+---
+
+## 📌 Setting No Fast Forward as Default
+
+To ensure all merges require an explicit commit:
+```sh
+git config --global merge.ff no
+```
+🔧 **This applies to all repositories globally.**
+
+---
+
+## 📌 Conclusion
+- A **Fast Forward Merge** keeps a **linear** history when branches haven't diverged.
+- A **No Fast Forward Merge** creates a **merge commit**, making it easier to track changes.
+- Git allows configuring `merge.ff no` to enforce No Fast Forward merges.
+
+🎯 **Choose the strategy that best fits your team's workflow!**
+
+---
 
 
 
