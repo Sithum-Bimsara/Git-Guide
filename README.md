@@ -2612,7 +2612,168 @@ git config --global merge.ff no
 
 ---
 
+# 📖 Git Three-Way Merge: A Complete Walkthrough
 
+## 🎯 Introduction
+In this lesson, we'll explore the concept of a **three-way merge** in Git. This is useful when two branches have diverged, meaning they have independent changes that need to be merged back together.
+
+---
+
+## 🚀 Step-by-Step Process
+
+### 🔍 Step 1: Checking Our Current Git History
+First, let's check our Git history to see where we are:
+```sh
+$ git log --oneline --all --graph
+```
+🔹 **Output:**
+```
+*   ff8fcb1 (HEAD -> master) Merge branch 'bugfix/login-form'
+|\
+| * 8538e99 (bugfix/login-form) Update toc.txt
+|/
+* f76e273 (bugfix/signup-form) Fix the bug that protect user from sign up
+* 8797d0e TOC.txt added
+* a2410e0 Audience.txt added
+* 68a073e File2 added
+* c43539f File1 added
+```
+
+---
+
+### 🔥 Step 2: Creating a New Feature Branch
+Let's create a new branch for implementing a **Change Password** feature:
+```sh
+$ git switch -C feature/change-password
+```
+🔹 **Output:**
+```
+Switched to a new branch 'feature/change-password'
+```
+
+Now, let's check our history again:
+```sh
+$ git log --oneline --all --graph
+```
+🔹 **Output:**
+```
+*   ff8fcb1 (HEAD -> feature/change-password, master) Merge branch 'bugfix/login-form'
+|\
+| * 8538e99 (bugfix/login-form) Update toc.txt
+|/
+* f76e273 (bugfix/signup-form) Fix the bug that protect user from sign up
+* 8797d0e TOC.txt added
+* a2410e0 Audience.txt added
+* 68a073e File2 added
+* c43539f File1 added
+```
+Both **master** and **feature/change-password** are pointing to the same commit.
+
+---
+
+### ✍ Step 3: Making Changes in the Feature Branch
+Let's add a new file related to the **Change Password** feature:
+```sh
+$ echo hello > change-password.txt
+$ git add .
+$ git commit -m "Build the change password form"
+```
+🔹 **Output:**
+```
+[feature/change-password 6ca05c1] Build the change password form
+ 1 file changed, 1 insertion(+)
+ create mode 100644 change-password.txt
+```
+
+Checking the history again:
+```sh
+$ git log --oneline --all --graph
+```
+🔹 **Output:**
+```
+* 6ca05c1 (HEAD -> feature/change-password) Build the change password form
+*   ff8fcb1 (master) Merge branch 'bugfix/login-form'
+|\
+| * 8538e99 (bugfix/login-form) Update toc.txt
+|/
+* f76e273 (bugfix/signup-form) Fix the bug that protect user from sign up
+```
+
+---
+
+### 🔁 Step 4: Making Changes in Master Branch
+Now, let's switch back to **master** and modify a file:
+```sh
+$ git switch master
+$ git add toc.txt
+$ git commit -m "Update TOC.txt"
+```
+🔹 **Output:**
+```
+[master 80a74e4] Update TOC.txt
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+```
+
+Checking the log:
+```sh
+$ git log --oneline --all --graph
+```
+🔹 **Output:**
+```
+* 80a74e4 (HEAD -> master) Update TOC.txt
+| * 6ca05c1 (feature/change-password) Build the change password form
+|/
+*   ff8fcb1 Merge branch 'bugfix/login-form'
+|\
+| * 8538e99 (bugfix/login-form) Update toc.txt
+|/
+* f76e273 (bugfix/signup-form) Fix the bug that protect user from sign up
+```
+
+Now, the **feature/change-password** and **master** branches have diverged.
+
+---
+
+### 🔗 Step 5: Performing a Three-Way Merge
+Since both branches have independent changes, let's merge them:
+```sh
+$ git merge feature/change-password
+```
+🔹 **Output:**
+```
+Merge made by the 'ort' strategy.
+ change-password.txt | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 change-password.txt
+```
+
+Checking the final log:
+```sh
+$ git log --oneline --all --graph
+```
+🔹 **Output:**
+```
+*   e090bc9 (HEAD -> master) Merge branch 'feature/change-password'
+|\
+| * 6ca05c1 (feature/change-password) Build the change password form
+* | 80a74e4 Update TOC.txt
+|/
+*   ff8fcb1 Merge branch 'bugfix/login-form'
+```
+
+---
+
+## 🎯 Conclusion
+✔️ We successfully created a **feature branch**, made changes to it, modified the **master** branch separately, and performed a **three-way merge**.
+
+💡 **Key Takeaways:**
+- A **three-way merge** occurs when two branches have diverged.
+- Git compares the latest commits on both branches with their **common ancestor**.
+- The merge process creates a new **merge commit** that combines changes from both branches.
+
+🚀 Now you have a solid understanding of how to handle a **three-way merge** in Git! 🎉
+
+---
 
 
 
