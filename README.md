@@ -2841,7 +2841,7 @@ When working with Git, merging branches is a common task. However, merge conflic
 
 ## 📌 Checking Available Branches
 ```bash
-C:\Users\User\Desktop\projects\GIT MOSH\Moon>git branch
+git branch
 ```
 **Output:**
 ```
@@ -2856,7 +2856,7 @@ C:\Users\User\Desktop\projects\GIT MOSH\Moon>git branch
 
 ## 🔄 Creating and Switching to a New Branch
 ```bash
-C:\Users\User\Desktop\projects\GIT MOSH\Moon>git switch -C bugfix/change-password
+git switch -C bugfix/change-password
 ```
 **Output:**
 ```
@@ -2868,7 +2868,7 @@ Switched to a new branch 'bugfix/change-password'
 
 ## 📝 Editing a File
 ```bash
-C:\Users\User\Desktop\projects\GIT MOSH\Moon>code change-password.txt
+code change-password.txt
 ```
 📌 Opens `change-password.txt` in VS Code for editing.
 
@@ -2876,8 +2876,8 @@ C:\Users\User\Desktop\projects\GIT MOSH\Moon>code change-password.txt
 
 ## 📤 Staging and Committing Changes
 ```bash
-C:\Users\User\Desktop\projects\GIT MOSH\Moon>git add .
-C:\Users\User\Desktop\projects\GIT MOSH\Moon>git commit -m"Update change-password.txt"
+git add .
+git commit -m"Update change-password.txt"
 ```
 **Output:**
 ```
@@ -2890,7 +2890,7 @@ C:\Users\User\Desktop\projects\GIT MOSH\Moon>git commit -m"Update change-passwor
 
 ## 🔍 Viewing Commit History
 ```bash
-C:\Users\User\Desktop\projects\GIT MOSH\Moon>git log --oneline --all --graph
+git log --oneline --all --graph
 ```
 **Output (Simplified):**
 ```
@@ -2904,7 +2904,7 @@ C:\Users\User\Desktop\projects\GIT MOSH\Moon>git log --oneline --all --graph
 
 ## 🔄 Switching Back to Master Branch
 ```bash
-C:\Users\User\Desktop\projects\GIT MOSH\Moon>git switch master
+git switch master
 ```
 **Output:**
 ```
@@ -2916,7 +2916,7 @@ Switched to branch 'master'
 
 ## 🔗 Merging Changes and Encountering a Conflict
 ```bash
-C:\Users\User\Desktop\projects\GIT MOSH\Moon>git merge bugfix/change-password
+git merge bugfix/change-password
 ```
 **Output:**
 ```
@@ -2930,7 +2930,7 @@ Automatic merge failed; fix conflicts and then commit the result.
 
 ## 🔍 Checking Status of Merge Conflict
 ```bash
-C:\Users\User\Desktop\projects\GIT MOSH\Moon>git status
+git status
 ```
 **Output:**
 ```
@@ -2947,7 +2947,7 @@ Unmerged paths:
 ## ✏️ Resolving the Conflict
 ### 🔹 Opening the File
 ```bash
-C:\Users\User\Desktop\projects\GIT MOSH\Moon>code change-password.txt
+code change-password.txt
 ```
 📌 Opens the file in VS Code to manually resolve conflicts.
 
@@ -3000,6 +3000,112 @@ git commit
 - Git marks conflicts with `<<<<<<<`, `=======`, and `>>>>>>>`.
 - Resolve conflicts manually, stage changes, and commit.
 - Avoid introducing new code while resolving conflicts unless necessary.
+
+---
+
+# 📌 Handling Merge Conflicts and Aborting a Merge in Git
+
+## 🧐 What Happens When You Encounter Merge Conflicts?
+When merging branches in Git, you might face **merge conflicts**. This happens when Git is unable to automatically reconcile differences between the branches. In such cases, Git requires you to manually resolve the conflicts before proceeding with the merge.
+
+## 🤔 What If You're Not Ready to Resolve the Conflicts?
+Sometimes, you may not have time to resolve conflicts immediately, or you may be in the middle of another task. In such situations, Git provides a way to **abort the merge** and return to the previous state.
+
+## 🚀 How to Abort a Merge
+To **abort an ongoing merge**, use the following command:
+
+```bash
+$ git merge --abort
+```
+
+### 📝 Explanation:
+- This command cancels the merge process.
+- It resets your working directory to the state before the merge started.
+- If you have already resolved some conflicts and staged the changes, those changes will be discarded.
+- Your repository will return to a clean state as if the merge never happened.
+
+## 🛠 Example Scenario
+### Step 1: Create a New Repository and Initialize Git
+```bash
+$ mkdir merge-example
+$ cd merge-example
+$ git init
+```
+**Output:**
+```
+Initialized empty Git repository in /path/to/merge-example/.git/
+```
+
+### Step 2: Create and Switch to a New Branch
+```bash
+$ git checkout -b feature-branch
+```
+**Output:**
+```
+Switched to a new branch 'feature-branch'
+```
+
+### Step 3: Create a File and Make Changes in Different Branches
+#### On `feature-branch`
+```bash
+echo "Hello from feature branch!" > file.txt
+git add file.txt
+git commit -m "Added file.txt in feature branch"
+```
+**Output:**
+```
+[feature-branch (root-commit) 123abc] Added file.txt in feature branch
+ 1 file changed, 1 insertion(+)
+ create mode 100644 file.txt
+```
+
+#### Switch to `main` and Modify the Same File
+```bash
+$ git checkout main
+echo "Hello from main branch!" > file.txt
+git add file.txt
+git commit -m "Modified file.txt in main branch"
+```
+**Output:**
+```
+[main 456def] Modified file.txt in main branch
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+```
+
+### Step 4: Try to Merge `feature-branch` into `main`
+```bash
+$ git merge feature-branch
+```
+**Output (Merge Conflict Detected):**
+```
+Auto-merging file.txt
+CONFLICT (content): Merge conflict in file.txt
+Automatic merge failed; fix conflicts and then commit the result.
+```
+
+### Step 5: Abort the Merge
+If you're not ready to resolve the conflict, use:
+```bash
+$ git merge --abort
+```
+**Output:** (No explicit output, but the merge is aborted)
+
+### Step 6: Verify the Merge Abort
+```bash
+$ git status
+```
+**Output:**
+```
+On branch main
+nothing to commit, working tree clean
+```
+
+## ✅ Summary
+- **Encountered a merge conflict?** Git will notify you about it.
+- **Not ready to resolve?** Use `git merge --abort` to go back to the previous clean state.
+- **No changes will be saved** from the merge attempt if you abort it.
+
+This technique is very useful when dealing with complex conflicts and needing to step back before making final decisions. 🛠️🔥
 
 ---
 
