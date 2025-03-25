@@ -2832,4 +2832,174 @@ By following these steps, you can efficiently manage branches in Git and avoid u
 
 ----
 
+# 📒 Git Branching & Merging: Handling Conflicts
+
+## 🚀 Introduction
+When working with Git, merging branches is a common task. However, merge conflicts often arise when changes overlap. This guide demonstrates handling merge conflicts through a practical example.
+
+---
+
+## 📌 Checking Available Branches
+```bash
+C:\Users\User\Desktop\projects\GIT MOSH\Moon>git branch
+```
+**Output:**
+```
+  bugfix/login-form
+  bugfix/signup-form
+  feature/change-password
+* master
+```
+📌 The asterisk (*) indicates the active branch (`master`).
+
+---
+
+## 🔄 Creating and Switching to a New Branch
+```bash
+C:\Users\User\Desktop\projects\GIT MOSH\Moon>git switch -C bugfix/change-password
+```
+**Output:**
+```
+Switched to a new branch 'bugfix/change-password'
+```
+📌 This command creates (`-C`) and switches to the `bugfix/change-password` branch.
+
+---
+
+## 📝 Editing a File
+```bash
+C:\Users\User\Desktop\projects\GIT MOSH\Moon>code change-password.txt
+```
+📌 Opens `change-password.txt` in VS Code for editing.
+
+---
+
+## 📤 Staging and Committing Changes
+```bash
+C:\Users\User\Desktop\projects\GIT MOSH\Moon>git add .
+C:\Users\User\Desktop\projects\GIT MOSH\Moon>git commit -m"Update change-password.txt"
+```
+**Output:**
+```
+[bugfix/change-password 397f30f] Update change-password.txt
+ 1 file changed, 1 insertion(+)
+```
+📌 Stages all changes (`git add .`) and commits them with a message.
+
+---
+
+## 🔍 Viewing Commit History
+```bash
+C:\Users\User\Desktop\projects\GIT MOSH\Moon>git log --oneline --all --graph
+```
+**Output (Simplified):**
+```
+* 397f30f (HEAD -> bugfix/change-password) Update change-password.txt
+*   e090bc9 (master) Merge branch 'feature/change-password'
+* | 80a74e4 Update TOC.txt
+```
+📌 Displays a graphical representation of commit history.
+
+---
+
+## 🔄 Switching Back to Master Branch
+```bash
+C:\Users\User\Desktop\projects\GIT MOSH\Moon>git switch master
+```
+**Output:**
+```
+Switched to branch 'master'
+```
+📌 Moves back to the `master` branch.
+
+---
+
+## 🔗 Merging Changes and Encountering a Conflict
+```bash
+C:\Users\User\Desktop\projects\GIT MOSH\Moon>git merge bugfix/change-password
+```
+**Output:**
+```
+Auto-merging change-password.txt
+CONFLICT (content): Merge conflict in change-password.txt
+Automatic merge failed; fix conflicts and then commit the result.
+```
+📌 A merge conflict occurs because `change-password.txt` has different changes in both branches.
+
+---
+
+## 🔍 Checking Status of Merge Conflict
+```bash
+C:\Users\User\Desktop\projects\GIT MOSH\Moon>git status
+```
+**Output:**
+```
+On branch master
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+Unmerged paths:
+  both modified:   change-password.txt
+```
+📌 Git indicates that `change-password.txt` has conflicts.
+
+---
+
+## ✏️ Resolving the Conflict
+### 🔹 Opening the File
+```bash
+C:\Users\User\Desktop\projects\GIT MOSH\Moon>code change-password.txt
+```
+📌 Opens the file in VS Code to manually resolve conflicts.
+
+### 🔹 Understanding Merge Conflict Markers
+```
+<<<<<<< HEAD
+Change in the master branch
+=======
+Change in the bugfix branch
+>>>>>>> bugfix/change-password
+```
+
+![Image](assets/img23.png)
+
+📌 Git marks conflicts with:
+- **`<<<<<<< HEAD`**: Changes in the current branch (`master`)
+- **`=======`**: Divider
+- **`>>>>>>>`**: Changes in the other branch (`bugfix/change-password`)
+
+![Image](assets/img24.png)
+![Image](assets/img25.png)
+
+
+### 🔹 Resolving by Keeping Both Changes
+```txt
+Change in the master branch
+Change in the bugfix branch
+```
+📌 Manually remove conflict markers and keep both changes.
+
+![Image](assets/img26.png)
+
+---
+
+## 📤 Staging and Completing the Merge
+```bash
+git add change-password.txt
+git commit
+```
+**Output:**
+```
+[master 5c03854] Merge branch 'bugfix/change-password'
+```
+📌 The merge is now successfully completed! 🎉
+
+---
+
+## 🎯 Key Takeaways
+- Merge conflicts happen when the same file is modified differently in two branches.
+- Git marks conflicts with `<<<<<<<`, `=======`, and `>>>>>>>`.
+- Resolve conflicts manually, stage changes, and commit.
+- Avoid introducing new code while resolving conflicts unless necessary.
+
+---
 
