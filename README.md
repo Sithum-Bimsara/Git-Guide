@@ -2776,6 +2776,60 @@ $ git log --oneline --all --graph
 ---
 
 
+# 📌 Managing Merged and Unmerged Branches in Git
 
+## 🛠️ Merging and Deleting Branches
+
+When we finish working on a branch, the best practice is to merge it into the `master` (or `main`) branch and then delete it. However, sometimes we forget to delete a merged branch. Over time, these branches pile up, leading to confusion about whether they are already merged or not. 
+
+Let's go through how to check for merged and unmerged branches. 
+
+---
+
+## 📋 Viewing Merged Branches
+
+Currently, we are on the `master` branch. To see the list of branches that have been merged into the current branch (`master`), use the following command:
+
+```sh
+git branch --merged
+```
+
+This will display all the branches that have already been merged into `master`. Since these branches have been merged, it's safe to delete them if you're done working on them.
+
+🚀 **Best practice:** Delete merged branches to keep your repository clean and organized!
+
+To delete a merged branch, use:
+
+```sh
+git branch -d bugfix/login
+```
+
+🔹 This will remove the `bugfix/login` branch since it's already merged.
+
+---
+
+## ❌ Viewing Unmerged Branches
+
+To check for branches that have **not** been merged into the current branch, use:
+
+```sh
+git branch --no-merged
+```
+
+If no output appears, it means that all branches have already been merged. If there are branches listed, it means they are still unmerged and may contain important work.
+
+---
+
+## 🎯 Summary
+
+✅ **Use `git branch --merged`** to list merged branches.
+
+✅ **Use `git branch --no-merged`** to list unmerged branches.
+
+✅ **Delete merged branches using `git branch -d <branch-name>`** to keep your repo clean.
+
+By following these steps, you can efficiently manage branches in Git and avoid unnecessary clutter in your repository. 🚀✨
+
+----
 
 
