@@ -2353,7 +2353,7 @@ $ echo "Another fix" >> bug.txt
 $ git commit -am "Another fix applied"
 ```
 
-![img17.png](attachment:6fb6d399-e44b-48ba-b178-4ac43c889d5d.png)
+![Image](assets/img17.png)
 
 At this point, the `bugfix` branch is ahead of `master`. Since the branches haven't diverged, merging is straightforward.
 
@@ -2365,13 +2365,13 @@ $ git checkout master
 $ git merge bugfix
 ```
 
-![img18.png](attachment:787c4925-1fb7-4e4f-9255-41e55e70d1c0.png)
+![Image](assets/img18.png)
 
 
 🔹 **What happens?**
 Since there’s a direct linear path from `bugfix` to `master`, Git **moves the `master` pointer forward** without creating a new commit. This is a **Fast Forward Merge**.
 
-![img19.png](attachment:4e7b707f-fb0c-419b-8844-a29cd3ecebf1.png)
+![Image](assets/img19.png)
 
 ```sh
 Updating 3f7a6c2..9b9cbb1
@@ -2431,7 +2431,7 @@ $ git merge bugfix
 🔹 **What happens?**
 Since `master` and `bugfix` have diverged, Git creates a **new commit** that combines changes from both branches. This is a **Three-Way Merge**.
 
-![img23.png](attachment:08157ce5-8118-4746-90bf-f393f85bb33d.png)
+![Image](assets/img23.png)
 
 ```sh
 Merge made by the 'recursive' strategy.
@@ -2442,7 +2442,7 @@ Merge made by the 'recursive' strategy.
 
 Git automatically resolves the changes and generates a **merge commit**.
 
-![img22.png](attachment:f640bf63-080a-42a0-86b0-b6b23399a791.png)
+![Image](assets/img22.png)
 
 📌 **Why is it called a Three-Way Merge?**
 It involves three commits:
@@ -2454,8 +2454,8 @@ Git looks at these three snapshots and decides how to combine them.
 
 ✅ **Three-Way Merge ensures that both branches' changes are preserved.**
 
-![img20.png](attachment:d93772c2-74cd-4b8d-bf31-8c4e99f593b7.png)
-![img21.png](attachment:f5d5e3b8-c75c-4d92-83d9-60338dfcc2ff.png)
+![Image](assets/img20.png)
+![Image](assets/img21.png)
 
 ---
 
@@ -3247,7 +3247,7 @@ A **new commit (6e0b0dd)** has been added to undo the merge!
 ## Understanding `git reset` Options
 
 
-![img27.png](attachment:3934775e-c43d-47c1-9823-dda61325f248.png)
+![Image](assets/img27.png)
 
 
 When we use `git reset`, we can specify different options to control what gets updated. These options determine how Git manipulates the HEAD, staging area, and working directory.
@@ -3309,3 +3309,205 @@ Be careful when using `--hard` as it will remove any uncommitted changes permane
 💡 **Now you know how to safely undo a Git merge!** 🎉
 
 ---
+
+
+# 📖 Git Squash Merging Explained with Example
+
+## 🚀 Introduction
+Squash merging is a powerful technique in Git that allows us to combine multiple commits into a single commit before merging into the main branch. This helps keep the commit history clean and avoids unnecessary, low-quality commits from cluttering the master branch.
+
+---
+
+## 🛠 Step-by-Step Guide to Squash Merging
+
+### 1️⃣ Create a New Branch
+```bash
+git switch -C bugfix/photo-upload
+```
+👉 **Explanation:** 
+- `git switch -C bugfix/photo-upload` creates a new branch called `bugfix/photo-upload` and switches to it.
+- `-C` ensures that the branch is created if it doesn't exist.
+
+---
+
+### 2️⃣ Make Changes and Commit
+#### 🔹 First Commit
+```bash
+echo bugfix >> audience.txt
+git commit -am "Update audience.txt"
+```
+**Git Output:**
+```
+[bugfix/photo-upload afa2081] Update audience.txt
+ 1 file changed, 1 insertion(+)
+```
+👉 **Explanation:** 
+- `echo bugfix >> audience.txt` adds a line containing "bugfix" to `audience.txt`.
+- `git commit -am "Update audience.txt"` stages and commits the changes with a message.
+
+#### 🔹 Second Commit
+```bash
+echo bugfix >> toc.txt
+git commit -am "Update toc.txt"
+```
+**Git Output:**
+```
+[bugfix/photo-upload 1c9a356] Update toc.txt
+ 1 file changed, 1 insertion(+)
+```
+👉 **Explanation:** 
+- `echo bugfix >> toc.txt` adds "bugfix" to `toc.txt`.
+- `git commit -am "Update toc.txt"` stages and commits the change.
+
+---
+
+![Image](assets/img29.png)
+
+### 3️⃣ View Git Log
+```bash
+git log --oneline --all --graph
+```
+**Git Output:**
+```
+* 1c9a356 (HEAD -> bugfix/photo-upload) Update toc.txt
+* afa2081 Update audience.txt
+* 6e0b0dd (master) Revert "Merge branch 'bugfix/change-password'"
+*   5c03854 Merge branch 'bugfix/change-password'
+|\
+| * 397f30f (bugfix/change-password) Update change-password.txt
+* | 8de2d9a Update change-password.txt
+|/
+*   e090bc9 Merge branch 'feature/change-password'
+|\
+| * 6ca05c1 (feature/change-password) Build the change password form
+* | 80a74e4 Update TOC.txt
+|/
+*   ff8fcb1 Merge branch 'bugfix/login-form'
+|\
+| * 8538e99 (bugfix/login-form) Update toc.txt
+|/
+* f76e273 (bugfix/signup-form) Fix the bug that protect user from sign up
+* 8797d0e TOC.txt added
+* a2410e0 Audience.txt added
+* 68a073e File2 added
+* c43539f File1 added
+
+```
+👉 **Explanation:** 
+- This command displays the commit history in a compact format.
+
+---
+
+Instead of this kind of normal 3 way merge like this,
+
+![Image](assets/img30.png)
+
+We do a Squash Merge.
+
+### 4️⃣ Perform a Squash Merge
+#### 🔹 Switch to Master Branch
+```bash
+git switch master
+```
+👉 **Explanation:** 
+- `git switch master` moves us back to the master branch.
+
+#### 🔹 Squash Merge the Bugfix Branch
+```bash
+git merge --squash bugfix/photo-upload
+```
+**Git Output:**
+```
+Updating 6e0b0dd..1c9a356
+Fast-forward
+Squash commit -- not updating HEAD
+ audience.txt | 1 +
+ toc.txt      | 1 +
+ 2 files changed, 2 insertions(+)
+```
+👉 **Explanation:** 
+- `git merge --squash bugfix/photo-upload` merges all changes from `bugfix/photo-upload` into the staging area as a single commit.
+- No merge commit is created, ensuring a clean history.
+
+#### 🔹 Commit the Squashed Changes
+```bash
+git commit -m "Fix the bug on the photo upload page"
+```
+**Git Output:**
+```
+[master 76a9526] Fix the bug on the photo upload page
+ 2 files changed, 2 insertions(+)
+```
+👉 **Explanation:** 
+- We manually commit the squashed changes with a meaningful message.
+
+![Image](assets/img31.png)
+
+---
+
+### 5️⃣ Delete the Bugfix Branch
+#### 🔹 Check Merged and Unmerged Branches
+```bash
+git branch --merged
+```
+**Git Output:**
+```
+  bugfix/change-password
+  bugfix/login-form
+  bugfix/signup-form
+  feature/change-password
+* master
+```
+```bash
+git branch --no-merged
+```
+**Git Output:**
+```
+  bugfix/photo-upload
+```
+👉 **Explanation:** 
+- `git branch --merged` shows branches that are fully merged.
+- `git branch --no-merged` shows branches not recognized as merged (due to squash merge).
+
+#### 🔹 Delete the Bugfix Branch
+
+![Image](assets/img32.png)
+
+
+```bash
+git branch -D bugfix/photo-upload
+```
+**Git Output:**
+```
+Deleted branch bugfix/photo-upload (was 1c9a356).
+```
+👉 **Explanation:** 
+- `git branch -D` forces deletion because Git does not recognize the branch as merged.
+
+---
+
+## ✅ Final Git Log
+```bash
+git log --oneline --all --graph
+```
+**Git Output:**
+```
+* 76a9526 (HEAD -> master) Fix the bug on the photo upload page
+* 6e0b0dd Revert "Merge branch 'bugfix/change-password'"
+```
+👉 **Explanation:** 
+- We now have a clean, linear history with a single commit representing all changes.
+
+---
+
+## 🎯 Key Takeaways
+✔ **Squash merging** combines multiple commits into a single commit, keeping history clean.
+✔ Use squash merging for **short-lived feature branches** or **bugfix branches**.
+✔ Always **delete** the target branch after a squash merge to avoid confusion.
+✔ Squash merging does **not** create a merge commit, making the history linear.
+✔ Be cautious of conflicts, and resolve them before committing.
+
+---
+
+## 🎉 Conclusion
+Squash merging is a great tool to maintain a clean and readable Git history. It helps when you have fine-grained commits that you don’t want to clutter your main branch. However, use it wisely and avoid squash merging large, complex feature branches that need to maintain detailed commit history.
