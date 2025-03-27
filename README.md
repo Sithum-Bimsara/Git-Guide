@@ -4572,3 +4572,97 @@ This walkthrough demonstrates a real-world collaboration scenario in Git:
 Now, we can apply these concepts in a team workflow efficiently! 🚀
 
 ---
+# 📌 Tracking Progress with Milestones in GitHub
+
+## 🎯 Introduction
+Milestones help us track the progress of various issues in a project. We can add multiple issues to a milestone and monitor our progress towards completing that milestone.
+
+---
+
+## 🏗 Creating a Milestone
+
+1. Navigate to the **Issues** tab.
+2. Click on **Milestones**.
+3. Click on **New Milestone**.
+4. Provide a **title** (e.g., `Version 2.0.0`).
+5. Optionally, set a **due date** (e.g., `January 13, 2025`).
+6. Add a **description** (optional but recommended).
+7. Click **Create Milestone**.
+
+✅ Now, we have a milestone created! It will appear in the **Milestones** tab.
+
+---
+
+## 📌 Assigning Issues to a Milestone
+
+1. Go to the **Issues** page.
+2. Select an issue (or multiple issues).
+3. Assign them to the milestone we created (`Version 2.0.0`).
+
+🔍 **Checking the Milestone Progress**:
+- Go back to the **Milestones** tab.
+- We can now see the number of **open** and **closed** issues.
+- The completion percentage is displayed (e.g., `0% complete` if no issues are closed).
+
+---
+
+## ✅ Closing an Issue to Complete the Milestone
+
+1. Navigate to the **Issues** tab.
+2. Select the assigned issue.
+3. Click **Close issue**.
+
+🔄 **Refreshing the Milestones Page**:
+- The milestone progress updates.
+- If all issues are closed, the milestone is marked **complete**! 🎉
+
+---
+
+## 📊 Console Output Examples
+
+```bash
+# Viewing milestones
+$ gh issue list --milestone "Version 2.0.0"
+
+# Output Example
+# No issues assigned yet
+```
+
+```bash
+# Assigning an issue to the milestone
+$ gh issue edit 1 --milestone "Version 2.0.0"
+
+# Output Example
+Issue #1 has been added to milestone "Version 2.0.0"
+```
+
+```bash
+# Closing an issue
+$ gh issue close 1
+
+# Output Example
+Issue #1 is now closed.
+```
+
+```bash
+# Checking milestone progress
+$ gh milestone view "Version 2.0.0"
+
+# Output Example
+Title: Version 2.0.0
+Due Date: September 30, 2020
+Open Issues: 0
+Closed Issues: 1
+Completion: 100%
+```
+
+---
+
+## 🎉 Summary
+- Milestones help us track progress efficiently.
+- Issues can be assigned to milestones.
+- Closing issues updates milestone progress.
+- Once all issues are closed, the milestone is complete.
+
+✅ Using milestones makes project management smoother and keeps the team on track!
+---
