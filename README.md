@@ -4066,5 +4066,122 @@ When we do `git push`, Git will send **C and M** to the remote repository, ensur
 - **Never use `--force` unless absolutely necessary!**
 - Keep your repository history clean and conflict-free.
 
-Happy coding! 🎉
+---
+# 📓 Git Tagging and Pushing - Notebook
+
+## 🎯 Introduction
+Git tags are useful for marking specific points in the repository's history, such as version releases. By default, tags are not pushed to remote repositories, so they must be explicitly pushed. This notebook walks through the process of creating, pushing, deleting, and verifying tags in Git.
+
+---
+
+## 🛠 Creating a Tag
+To create a new tag, we use the `git tag` command followed by the desired tag name:
+
+```sh
+C:\Users\User\Desktop\New folder\MarsSithum>git tag v1.0
+```
+
+This adds a tag `v1.0` to the most recent commit.
+
+### ✅ Verifying the Tag
+To check the created tag, we use:
+
+```sh
+C:\Users\User\Desktop\New folder\MarsSithum>git log --oneline
+```
+
+**Output:**
+```sh
+c529db5 (HEAD -> main, tag: v1.0, origin/main, origin/HEAD) Added file1
+d64938f Update README.md
+7d3dbdd Update README.md
+e747ff8 Initial commit
+```
+
+The `(tag: v1.0)` confirms that the tag `v1.0` has been added.
+
+---
+
+## 🚀 Pushing a Tag to Remote
+Since tags are not pushed by default, we explicitly push them:
+
+```sh
+C:\Users\User\Desktop\New folder\MarsSithum>git push origin v1.0
+```
+
+**Output:**
+```sh
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To https://github.com/Sithum-Bimsara/MarsSithum.git
+ * [new tag]         v1.0 -> v1.0
+```
+
+Now the tag `v1.0` is available on GitHub.
+
+---
+
+## 🗑️ Deleting a Tag from Remote
+If a tag is pushed by accident, it can be removed from the remote repository:
+
+```sh
+C:\Users\User\Desktop\New folder\MarsSithum>git push origin --delete v1.0
+```
+
+**Output:**
+```sh
+To https://github.com/Sithum-Bimsara/MarsSithum.git
+ - [deleted]         v1.0
+```
+
+The tag is now deleted from the remote repository.
+
+---
+
+## 🔄 Re-Pushing a Deleted Tag
+We can push the tag again if needed:
+
+```sh
+C:\Users\User\Desktop\New folder\MarsSithum>git push origin v1.0
+```
+
+**Output:**
+```sh
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To https://github.com/Sithum-Bimsara/MarsSithum.git
+ * [new tag]         v1.0 -> v1.0
+```
+
+The tag is once again available on GitHub.
+
+---
+
+## 🚨 Handling Tag Name Conflicts
+If we try to create a tag that already exists, Git returns an error:
+
+```sh
+C:\Users\User\Desktop\New folder\MarsSithum>git tag v1.0
+```
+
+**Error Output:**
+```sh
+fatal: tag 'v1.0' already exists
+```
+
+To delete the local tag before recreating it:
+
+```sh
+git tag -d v1.0
+```
+
+---
+
+## 📜 Conclusion
+- Tags help mark specific versions of a project.
+- They are not pushed automatically and must be explicitly pushed.
+- Tags can be deleted from remote using `git push origin --delete <tag>`.
+- Local tags remain unless deleted manually using `git tag -d <tag>`.
+
+These operations ensure better version control and collaboration in Git projects. 🚀
+
+---
 
