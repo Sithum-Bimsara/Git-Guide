@@ -3615,7 +3615,11 @@ Open-source projects require a different workflow since contributors are **unkno
 
 ---
 
-# 📘 Git Workflow: Fetch, Merge, and Logs
+# 📘  Fetch && Merge
+
+![Image](assets/img43.png)
+![Image](assets/img44.png)
+![Image](assets/img45.png)
 
 ## 🌟 Introduction
 In this notebook, we will explore the essential Git commands used to synchronize a local repository with a remote repository. We will walk through the process of fetching updates, merging branches, and understanding Git logs, along with their outputs. 
