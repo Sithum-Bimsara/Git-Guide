@@ -3614,3 +3614,168 @@ Open-source projects require a different workflow since contributors are **unkno
 
 
 ---
+
+# 📘 Git Workflow: Fetch, Merge, and Logs
+
+## 🌟 Introduction
+In this notebook, we will explore the essential Git commands used to synchronize a local repository with a remote repository. We will walk through the process of fetching updates, merging branches, and understanding Git logs, along with their outputs. 
+
+---
+
+## 📌 Checking Git Log
+
+```bash
+git log --oneline --all --graph
+```
+
+### ✅ Output:
+```
+* e747ff8 (HEAD -> main, origin/main, origin/HEAD) Initial commit
+```
+
+### 🔍 Explanation:
+- This command shows a compact, one-line-per-commit view of the commit history in a graphical format.
+- The `HEAD` pointer indicates that our working branch is `main`.
+
+---
+
+## 🔄 Fetching Changes from Remote
+
+```bash
+git fetch
+```
+
+### ✅ Output:
+```
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (3/3), 921 bytes | 115.00 KiB/s, done.
+From https://github.com/Sithum-Bimsara/MarsSithum
+   e747ff8..7d3dbdd  main       -> origin/main
+```
+
+### 🔍 Explanation:
+- `git fetch` downloads updates from the remote repository.
+- The commit `7d3dbdd` is a new update available in `origin/main`, but it hasn't been merged yet.
+
+---
+
+## 📌 Checking Git Log After Fetch
+
+```bash
+git log --oneline --all --graph
+```
+
+### ✅ Output:
+```
+* 7d3dbdd (origin/main, origin/HEAD) Update README.md
+* e747ff8 (HEAD -> main) Initial commit
+```
+
+### 🔍 Explanation:
+- The latest commit (`7d3dbdd`) exists remotely but hasn't been applied locally yet.
+
+---
+
+## 📌 Checking Local and Remote Branches
+
+```bash
+git branch -vv
+```
+
+### ✅ Output:
+```
+* main e747ff8 [origin/main: behind 1] Initial commit
+```
+
+### 🔍 Explanation:
+- The local branch is behind the remote branch by one commit.
+
+---
+
+## 🔀 Merging Remote Changes
+
+```bash
+git merge origin/main
+```
+
+### ✅ Output:
+```
+Updating e747ff8..7d3dbdd
+Fast-forward
+ README.md | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+```
+
+### 🔍 Explanation:
+- Since there are no conflicting changes, Git performs a **fast-forward merge**, updating `main` to the latest commit.
+- The README.md file has been modified with **2 insertions** and **1 deletion**.
+
+---
+
+## 📌 Checking Git Log After Merge
+
+```bash
+git log --oneline --all --graph
+```
+
+### ✅ Output:
+```
+* 7d3dbdd (HEAD -> main, origin/main, origin/HEAD) Update README.md
+* e747ff8 Initial commit
+```
+
+### 🔍 Explanation:
+- Now, `HEAD` and `main` are in sync with `origin/main`.
+
+---
+
+## 📌 Verifying the Branch Status
+
+```bash
+git branch -vv
+```
+
+### ✅ Output:
+```
+* main 7d3dbdd [origin/main] Update README.md
+```
+
+### 🔍 Explanation:
+- The message **"behind 1 commit"** is no longer displayed since our branch is up-to-date.
+
+---
+
+## 📝 Viewing the Updated README File
+
+```bash
+type README.md
+```
+
+### ✅ Output:
+```
+# MarsSithum
+A new line of code
+```
+
+### 🔍 Explanation:
+- The README file has been successfully updated with the new content.
+
+---
+
+## 🎯 Summary
+1. **git log --oneline --all --graph** 📜 → View commit history.
+2. **git fetch** 🔄 → Download updates from the remote repository.
+3. **git log --oneline --all --graph** 🕵️‍♂️ → Check fetched commits.
+4. **git branch -vv** 🔎 → Verify local vs. remote branch status.
+5. **git merge origin/main** 🔗 → Merge remote changes.
+6. **git log --oneline --all --graph** ✅ → Confirm merge success.
+7. **git branch -vv** 🎯 → Check updated branch status.
+8. **type README.md** 📖 → Verify file updates.
+
+---
+
+🚀 **Now, our local repository is successfully updated with the latest changes from the remote repository!**
+
+---
