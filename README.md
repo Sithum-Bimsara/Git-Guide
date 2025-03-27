@@ -3511,3 +3511,106 @@ git log --oneline --all --graph
 
 ## 🎉 Conclusion
 Squash merging is a great tool to maintain a clean and readable Git history. It helps when you have fine-grained commits that you don’t want to clutter your main branch. However, use it wisely and avoid squash merging large, complex feature branches that need to maintain detailed commit history.
+
+---
+# 📌 Version Control Workflows in Git
+
+## 🔍 Introduction
+Version control systems fall into two main categories:
+
+1. **Centralized Version Control Systems (CVCS)** – e.g., Subversion (SVN)
+2. **Distributed Version Control Systems (DVCS)** – e.g., Git
+
+---
+
+## 🏛 Centralized vs. Distributed Version Control
+
+### 🏢 Centralized Systems (e.g., SVN)
+- A **single repository** is shared among all team members.
+- Everyone is **dependent** on this central repository.
+- **Disadvantage**: If the central server goes offline, no one can commit or view the project history. ❌
+
+### 💻 Distributed Systems (e.g., Git)
+- Every developer has their **own local repository**.
+- Developers can work **offline** with their local repository. ✅
+- Collaboration happens by **synchronizing** changes with others.
+- No single point of failure! 🎉
+
+However, direct synchronization between developers is complex and error-prone. Instead, we use **structured workflows** to collaborate efficiently.
+
+---
+
+## 🔄 The Centralized Workflow
+
+In this workflow, we combine the best of both centralized and distributed models:
+
+1. Everyone has a **local repository**.
+2. A **central repository** is used to synchronize work.
+3. Developers **push** their changes to the central repository.
+4. Others **pull** the latest changes from the central repository.
+
+### 🛠 How It Works:
+📌 **Example:** John & Amy collaborate on a project:
+1. **Cloning** – They each take a copy of the central repository.
+2. **Committing** – John makes some commits locally. Meanwhile, Amy makes her own commits.
+3. **Pushing** – John pushes his changes to the central repository.
+4. **Pulling** – Amy pulls John's changes into her local repository.
+5. **Conflict Resolution** – If there are conflicts, Amy resolves them before pushing her work.
+
+👥 **Use Case**: This workflow is commonly used in **private teams** and **closed-source projects**.
+
+### 📍 Why Use This Workflow?
+✅ No **single point of failure** – work continues even if the central repository is down.
+
+✅ Allows **offline development**.
+
+✅ Can use **Git hosting services** like **GitHub, GitLab**, or an internal server.
+
+---
+
+## 🌍 The Integration Manager Workflow (For Open Source Projects)
+
+Open-source projects require a different workflow since contributors are **unknown** and cannot be given direct write access. 🔒
+
+### 📌 How It Works:
+📌 **Example:** Contributing to an open-source project:
+1. **Forking** – Create a copy of the project repository in the cloud (e.g., on GitHub).
+
+![Image](assets/img37.png)
+
+2. **Cloning** – Download the forked repository locally.
+
+![Image](assets/img38.png)
+
+3. **Committing** – Make changes and commit them locally.
+4. **Pushing** – Push the changes to the forked repository.
+
+
+![Image](assets/img39.png)
+
+5. **Pull Request** – Submit a request to merge changes into the official repository.
+
+![Image](assets/img40.png)
+
+6. **Review & Merge** – Maintainers review the changes and, if approved, merge them.
+
+
+![Image](assets/img41.png)
+![Image](assets/img42.png)
+
+
+🔑 **Key Aspects:**
+- Only **maintainers** have push access to the main repository.
+- Contributors **fork** the repository and make changes in their own copy.
+- Changes are proposed via **pull requests**.
+
+👥 **Use Case**: This workflow is widely used in **open-source projects**.
+
+---
+
+## 🎯 Conclusion
+- **Centralized Workflow**: Used in **private teams** for easier collaboration.
+- **Integration Manager Workflow**: Used in **open-source projects** to maintain security and organization.
+
+
+---
