@@ -3783,3 +3783,288 @@ A new line of code
 🚀 **Now, our local repository is successfully updated with the latest changes from the remote repository!**
 
 ---
+
+# 📓 Git Pull, Merge, and Rebase
+
+## 📝 Introduction
+
+When working with Git, it's essential to keep our local repository up-to-date with the remote repository. The two primary methods to achieve this are:
+
+1. **Merge** - Combines remote changes with local changes using a three-way merge.
+2. **Rebase** - Reapplies local changes on top of remote changes to maintain a linear history.
+
+---
+
+## 🔄 Fetch vs. Pull
+
+To bring changes from the remote repository to our local repository, we usually:
+- **Fetch** to download new changes.
+- **Merge** to integrate them into our local branch.
+
+Instead of running these separately, we can use the **`git pull`** command, which combines both operations.
+
+### 📌 Scenario:
+
+Imagine we have a repository with the following commit history:
+```
+A -- (Local and Remote repositories are the same)
+```
+
+![img46.png](attachment:1b3f9456-2056-4cb7-adc1-c125649fabfa.png)
+
+Then, changes happen in both repositories:
+- **Local Repository**: Adds commit **B**
+
+![img47.png](attachment:ddb08a93-bd66-4a1d-ac20-8b9f314bb33d.png)
+
+- **Remote Repository**: Adds commit **C**
+
+
+![img48.png](attachment:58a5a1f4-8e51-450a-a3a9-f25ad76857d2.png)
+
+When we run:
+```sh
+git pull
+```
+Git will:
+1. Download commit **C**.
+2. Merge **C** into our local repository.
+
+![img49.png](attachment:af48cf2a-4614-41cb-af17-f6f03c1aba6a.png)
+
+Since the branches have diverged, Git performs a **three-way merge**. 
+
+![img50.png](attachment:1ddf936e-692d-40c7-a7b1-920d42c955cc.png)
+
+
+However, this creates a non-linear history. If you prefer a cleaner history, you can use **rebase** instead.
+
+
+![img51.png](attachment:56f6dcdf-b912-468c-a2a7-1ff7b26b2286.png)
+![img52.png](attachment:3d5c1773-fdaa-4a4c-81f6-5506832a0a80.png)
+
+
+### 🔄 Rebase Instead of Merge
+
+Rebasing changes the base of our branch from **A** to **C** and reapplies our local changes on top of **C**:
+```sh
+git pull --rebase
+```
+This results in a linear history instead of a merge commit.
+
+#### ✅ Which Approach is Better?
+- **Merge**: Useful when you want to keep track of how changes evolved.
+- **Rebase**: Keeps history cleaner but rewrites commit history.
+- **Best Practice**: Use rebase for private branches and merge for public/shared branches.
+
+---
+
+## 🛠️ Practical Example
+
+### 1️⃣ Making Changes on GitHub
+- Edit a file (e.g., `README.md`) on GitHub.
+- Add a new commit: `Commit C`.
+
+### 2️⃣ Making Local Changes
+```sh
+touch file1.txt
+git add file1.txt
+git commit -m "Add file1"
+```
+Now, our local and remote branches have diverged.
+
+### 3️⃣ Checking Our Log
+```sh
+git log --oneline --all --graph
+```
+🔹 Output:
+```
+* 707183c (HEAD -> main) Added file1
+* 7d3dbdd (origin/main, origin/HEAD) Update README.md
+* e747ff8 Initial commit
+```
+
+### 4️⃣ Pulling Remote Changes
+```sh
+git pull
+```
+This performs a three-way merge, resulting in a **merge commit**:
+```
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (3/3), 935 bytes | 17.00 KiB/s, done.
+From https://github.com/Sithum-Bimsara/MarsSithum
+   7d3dbdd..d64938f  main       -> origin/main
+Merge made by the 'ort' strategy.
+ README.md | 1 +
+ 1 file changed, 1 insertion(+)
+```
+
+###  Checking Our Log
+```sh
+git log --oneline --all --graph
+```
+🔹 Output:
+```
+*   2d9bc47 (HEAD -> main) Merge branch 'main' of https://github.com/Sithum-Bimsara/MarsSithum
+|\
+| * d64938f (origin/main, origin/HEAD) Update README.md
+* | 707183c Added file1
+|/
+* 7d3dbdd Update README.md
+* e747ff8 Initial commit
+```
+
+### 5️⃣ Undoing the Merge Commit
+```sh
+git reset --hard HEAD~1
+```
+Now our branch is back to the state before merging.
+
+
+```sh
+git log --oneline --all --graph
+```
+🔹 Output:
+```
+* 707183c (HEAD -> main) Added file1
+| * d64938f (origin/main, origin/HEAD) Update README.md
+|/
+* 7d3dbdd Update README.md
+* e747ff8 Initial commit
+```
+
+### 6️⃣ Using Rebase Instead
+```sh
+git pull --rebase
+```
+This replays our local changes on top of the latest remote commit, resulting in a linear history.
+
+### 7️⃣ Checking Our Log Again
+```sh
+git log --oneline --all --graph
+```
+🔹 Output:
+```
+* c529db5 (HEAD -> main) Added file1
+* d64938f (origin/main, origin/HEAD) Update README.md
+* 7d3dbdd Update README.md
+* e747ff8 Initial commit
+```
+Now we have a **linear history** instead of a merge commit.
+
+---
+
+## 🚀 Pushing Changes
+
+Once our local repository is ahead of the remote, we push changes using:
+```sh
+git push
+```
+This sends new commits to the remote repository.
+
+### ❌ Handling Push Rejections
+If someone else has pushed new commits before us, our push may be rejected. In this case:
+```sh
+git pull --rebase
+```
+Resolve conflicts if any, then push again:
+```sh
+git push
+```
+
+### 🚨 Never Use `git push --force` Unless Necessary
+Forcing a push (`git push --force`) can overwrite other people's work. Avoid using it unless you are sure.
+
+---
+
+## 📌 Summary
+- **`git pull`** = `git fetch` + `git merge`
+- **`git pull --rebase`** replays local commits on top of remote commits for a linear history.
+- **`git push`** sends local commits to the remote repository.
+- Always pull and resolve conflicts before pushing.
+- 
+📌 Follow these best practices for a smooth Git workflow! 🚀
+
+# Git Push and Handling Rejections 🚀
+
+## Understanding `git push`
+In our local repository, our `master` branch is ahead of `origin/master` by one commit. This means we have made a change locally that is not yet in the remote repository. To sync our local changes with the remote repository, we use the `git push` command.
+
+### Steps to Push a Commit
+1. Git sends our new commit to the remote repository.
+2. The `master` pointer moves forward to point to the new commit.
+3. The `origin/master` pointer also updates to reflect the new commit.
+
+#### **Command to Push Changes:**
+```bash
+$ git push
+```
+- Here, `git push` is enough because Git assumes `origin` as the default remote repository.
+- If needed, you can specify explicitly:
+  ```bash
+  $ git push origin master
+  ```
+
+💡 **Note:** If authentication is required, Git will prompt you to enter your GitHub credentials (email and password).
+
+### **Verifying the Push**
+Once the push is successful, we can verify it on GitHub:
+- Navigate to the repository on GitHub.
+- Check the commits section.
+- You should see the latest commit listed.
+
+## Push Rejections and How to Handle Them ❌
+### **Why Does a Push Get Rejected?**
+Sometimes, when you try to push, Git rejects your changes. This happens when someone else has pushed new commits to the remote repository before you.
+
+### **Incorrect Way: Using `--force` (⚠️ Dangerous!)**
+```bash
+$ git push --force
+```
+- This force-push will **override other people’s work**, which is **highly discouraged** unless necessary.
+- Only use this if you fully understand the consequences.
+
+### **Correct Way: Syncing with Remote**
+To safely merge new changes before pushing:
+
+1. **Fetch the latest changes from remote:**
+   ```bash
+   $ git pull --rebase
+   ```
+   - This pulls the new commits and places your changes on top.
+   - If there are conflicts, resolve them manually.
+
+2. **Merge or Rebase if Needed**
+   ```bash
+   $ git merge origin/master
+   ```
+   or
+   ```bash
+   $ git rebase origin/master
+   ```
+
+3. **Push Again**
+   ```bash
+   $ git push
+   ```
+
+## Understanding Git History 🕰️
+Looking at the commit history, let’s analyze what changes exist in our local repository that are missing in the remote repository.
+
+- Local repository: **Commits A, B, C, D, and M**
+- Remote repository: **Commits A, B, and D**
+- Missing commits in remote: **C and M**
+
+When we do `git push`, Git will send **C and M** to the remote repository, ensuring both repositories are now in sync.
+
+## Conclusion ✅
+- Use `git push` to upload commits.
+- If a push is rejected, first **pull and merge**.
+- **Never use `--force` unless absolutely necessary!**
+- Keep your repository history clean and conflict-free.
+
+Happy coding! 🎉
+
