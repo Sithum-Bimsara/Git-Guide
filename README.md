@@ -4185,3 +4185,165 @@ These operations ensure better version control and collaboration in Git projects
 
 ---
 
+# Git Branching and Remote Tracking Branches 🌿
+
+## Introduction 📝
+In this notebook, we will explore how to work with Git branches, push them to a remote repository, set upstream branches, and delete them. We will also discuss how remote tracking branches work.
+
+---
+
+## Creating a New Branch 📌
+
+```sh
+git switch -C feature/change-password
+```
+**Output:**
+```
+Switched to a new branch 'feature/change-password'
+```
+✅ This command creates a new branch named `feature/change-password` and switches to it.
+
+---
+
+## Pushing the New Branch 🚀
+```sh
+git push
+```
+**Output:**
+```
+fatal: The current branch feature/change-password has no upstream branch.
+```
+❌ The branch does not have an upstream branch on the remote repository.
+
+To link it with the remote repository, use:
+```sh
+git push --set-upstream origin feature/change-password
+```
+
+---
+
+## Checking Local and Remote Branches 🧐
+
+To check local and remote tracking branches, use:
+```sh
+git branch -vv
+```
+**Output:**
+```
+* feature/change-password c529db5 Added file1
+  main                    c529db5 [origin/main] Added file1
+```
+
+To see remote tracking branches:
+```sh
+git branch -r
+```
+**Output:**
+```
+  origin/HEAD -> origin/main
+  origin/main
+```
+📌 The remote repository currently tracks only the `main` branch.
+
+---
+
+## Pushing and Tracking the New Branch 📤
+
+```sh
+git push -u origin feature/change-password
+```
+**Output:**
+```
+To https://github.com/Sithum-Bimsara/MarsSithum.git
+ * [new branch]      feature/change-password -> feature/change-password
+branch 'feature/change-password' set up to track 'origin/feature/change-password'.
+```
+✅ Now, the local branch `feature/change-password` is linked to the remote branch.
+
+Verify by running:
+```sh
+git branch -vv
+```
+**Output:**
+```
+* feature/change-password c529db5 [origin/feature/change-password] Added file1
+  main                    c529db5 [origin/main] Added file1
+```
+🔍 The branch is now tracked remotely.
+
+Check remote branches again:
+```sh
+git branch -r
+```
+**Output:**
+```
+  origin/HEAD -> origin/main
+  origin/feature/change-password
+  origin/main
+```
+🌟 Now, `feature/change-password` exists on GitHub.
+
+---
+
+## Deleting the Remote Branch ❌
+
+To delete the remote branch:
+```sh
+git push -d origin feature/change-password
+```
+**Output:**
+```
+To https://github.com/Sithum-Bimsara/MarsSithum.git
+ - [deleted]         feature/change-password
+```
+✅ The branch is removed from the remote repository.
+
+Check remote branches:
+```sh
+git branch -r
+```
+**Output:**
+```
+  origin/HEAD -> origin/main
+  origin/main
+```
+📌 The `feature/change-password` branch no longer exists on the remote repository.
+
+Check local branches:
+```sh
+git branch -vv
+```
+**Output:**
+```
+* feature/change-password c529db5 [origin/feature/change-password: gone] Added file1
+  main                    c529db5 [origin/main] Added file1
+```
+🔍 The local branch still exists, but its remote tracking branch is marked as `gone`.
+
+---
+
+## Switching Back to Main Branch 🔄
+
+To switch to the `main` branch:
+```sh
+git switch main
+```
+**Output:**
+```
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+```
+✅ We are now back on the `main` branch.
+
+---
+
+## Summary 📖
+- Created a new branch `feature/change-password`.
+- Pushed the branch to the remote repository and linked it.
+- Checked local and remote tracking branches.
+- Deleted the branch from the remote repository.
+- Switched back to the `main` branch.
+
+🌟 This is how you create, push, track, and delete branches in Git!
+
+---
