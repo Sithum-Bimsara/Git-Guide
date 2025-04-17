@@ -1,4 +1,23 @@
-# 📌 Git: The Ultimate Version Control System
+# Table of Contents
+- [01.Git_The_Ultimate_Version_Control_System](#Git_The_Ultimate_Version_Control_System)
+- [02.Git_Workflow_Explained](#Git_Workflow_Explained)
+- [03.Skipping_the_Staging_Area](#Skipping_the_Staging_Area)
+- [04.Short_Status_View_And_Restore_History](#Short_Status_View_And_Restore_History)
+- [05.Git_Log_Analysis_and_Filtering](#Git_Log_Analysis_and_Filtering)
+- [03.Skipping_the_Staging_Area](#Skipping_the_Staging_Area)
+- [03.Skipping_the_Staging_Area](#Skipping_the_Staging_Area)
+- [03.Skipping_the_Staging_Area](#Skipping_the_Staging_Area)
+- [03.Skipping_the_Staging_Area](#Skipping_the_Staging_Area)
+- [03.Skipping_the_Staging_Area](#Skipping_the_Staging_Area)
+- [03.Skipping_the_Staging_Area](#Skipping_the_Staging_Area)
+- [03.Skipping_the_Staging_Area](#Skipping_the_Staging_Area)
+- [03.Skipping_the_Staging_Area](#Skipping_the_Staging_Area)
+- [03.Skipping_the_Staging_Area](#Skipping_the_Staging_Area)
+- [03.Skipping_the_Staging_Area](#Skipping_the_Staging_Area)
+- [03.Skipping_the_Staging_Area](#Skipping_the_Staging_Area)
+
+
+# Git_The_Ultimate_Version_Control_System
 
 ## 🔍 What is a Version Control System (VCS)?
 A **Version Control System (VCS)** is a tool that helps developers track changes in their code over time, collaborate effectively, and revert to previous versions if needed.
@@ -167,7 +186,7 @@ Different line endings can cause issues when switching between operating systems
 
 ---
 
-# 🚀 Git Workflow Explained
+# Git_Workflow_Explained
 
 ## 🔄 Understanding the Git Workflow
 Git follows a structured workflow to track changes efficiently. The process involves three main areas:
@@ -331,9 +350,9 @@ git commit
 ---
 🎉 **Now you understand the full Git workflow!** 🚀
 
-# 🛠️ Git Scenarios and Command Guide
+---
 
-## 🎯 Skipping the Staging Area
+# Skipping_the_Staging_Area
 
 ### Command:
 ```bash
@@ -694,7 +713,11 @@ Changes to be committed:
 git commit -m "Remove the bin directory that was accidentally committed"
 ```
 
---------------
+---
+
+# Short_Status_View_And_Restore_History
+
+
 
 ## 1️⃣ Short Status (`git status -s`)
 
@@ -939,6 +962,8 @@ git restore --source=HEAD~1 file1.js
 This guide provides a comprehensive understanding of Git log commands and their outputs, ensuring a clear and structured approach to Git history tracking.
 
 ---
+
+# Git_Log_Analysis_and_Filtering
 
 ### 🔍 Viewing Git History
 
