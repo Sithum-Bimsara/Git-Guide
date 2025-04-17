@@ -4,17 +4,14 @@
 - [03.Skipping_the_Staging_Area](#Skipping_the_Staging_Area)
 - [04.Short_Status_View_And_Restore_History](#Short_Status_View_And_Restore_History)
 - [05.Git_Log_Analysis_and_Filtering](#Git_Log_Analysis_and_Filtering)
-- [03.Skipping_the_Staging_Area](#Skipping_the_Staging_Area)
-- [03.Skipping_the_Staging_Area](#Skipping_the_Staging_Area)
-- [03.Skipping_the_Staging_Area](#Skipping_the_Staging_Area)
-- [03.Skipping_the_Staging_Area](#Skipping_the_Staging_Area)
-- [03.Skipping_the_Staging_Area](#Skipping_the_Staging_Area)
-- [03.Skipping_the_Staging_Area](#Skipping_the_Staging_Area)
-- [03.Skipping_the_Staging_Area](#Skipping_the_Staging_Area)
-- [03.Skipping_the_Staging_Area](#Skipping_the_Staging_Area)
-- [03.Skipping_the_Staging_Area](#Skipping_the_Staging_Area)
-- [03.Skipping_the_Staging_Area](#Skipping_the_Staging_Area)
-- [03.Skipping_the_Staging_Area](#Skipping_the_Staging_Area)
+- [06.View_Commits](#View_Commits)
+- [07.Viewing_a_Commit_and_Understanding_Detached_HEAD_in_Git](#Viewing_a_Commit_and_Understanding_Detached_HEAD_in_Git)
+- [08.Finding_Contributions](#Finding_Contributions)
+- [09.Restoring_a_Deleted_File](#Restoring_a_Deleted_File)
+- [10.Finding_the_Author_of_a_Line_Blame](#Finding_the_Author_of_a_Line_Blame)
+- [11.Git_Tagging](#Git_Tagging)
+- [12.Git_Bisect_Finding_Bugs_Efficiently](#Git_Bisect_Finding_Bugs_Efficiently)
+- [13.Branching_01_Understanding_Git_Branching](#Branching_01_Understanding_Git_Branching)
 
 
 # Git_The_Ultimate_Version_Control_System
@@ -1090,17 +1087,8 @@ Sithum Bimsara commited 14f4275 on Sat Mar 15 11:49:58 2025 +0530
 
 ---
 
-This guide provides a structured approach to exploring Git history efficiently! 🚀
 
-
-
-
-
----
-
-🎉 **Now you've mastered these essential Git scenarios!**
-
-# 📌 View Commits
+#  View_Commits
 
 ## 🔗 Creating Git Aliases
 Git aliases allow us to create shortcuts for commonly used commands.
@@ -1264,9 +1252,8 @@ M       file2.js
 
 ---
 
-🎉 With these commands, you can efficiently navigate Git history, track changes, and optimize your workflow! 🚀
 
-# 🧐 Understanding Detached HEAD in Git
+#  Viewing_a_Commit_and_Understanding_Detached_HEAD_in_Git
 
 ## 🛤️ Viewing the Complete Snapshot of a Commit
 
@@ -1399,7 +1386,9 @@ master ----> commit1 ----> commit2 ----> commit3 ----> commit4 (HEAD)
 
 ✅ **Key Takeaway:** Use detached HEAD to explore past code, not to make changes!
 
-## 🛠 Finding Contributions
+---
+
+# Finding_Contributions
 
 ### 🔍 Checking Individual Contributions
 
@@ -1445,7 +1434,7 @@ The `-n` option sorts authors by the number of commits, and `-s` shows only the 
 
 ---
 
-## 🔄 Restoring a Deleted File
+# Restoring_a_Deleted_File
 
 If you accidentally delete a file in Git, you can restore it. Let’s see a real-world scenario:
 
@@ -1497,7 +1486,7 @@ nothing to commit, working tree clean
 
 ---
 
-## 🏷 Finding the Author of a Line (Blame)
+# Finding_the_Author_of_a_Line_Blame
 
 The `git blame` command helps identify who made changes to specific lines of a file.
 
@@ -1525,7 +1514,7 @@ git blame -e file1.js
 
 ---
 
-## 🏷 Git Tagging
+# Git_Tagging
 
 ### 🔖 Creating a Lightweight Tag
 ```bash
@@ -1579,7 +1568,7 @@ This provides a comprehensive understanding of commonly used Git operations, mak
 
 
 
-# Git Bisect: Finding Bugs Efficiently 🕵️‍♂️🐛
+# Git_Bisect_Finding_Bugs_Efficiently
 
 ## Introduction
 Git bisect is a powerful tool that helps developers quickly find the commit that introduced a bug in their application. Instead of checking out each commit manually, `git bisect` allows us to use a binary search algorithm to pinpoint the faulty commit efficiently.
@@ -1745,7 +1734,7 @@ Switched to branch 'master'
 Using `git bisect`, we efficiently pinpointed the commit where the bug originated, saving time and effort compared to manually checking each commit. This technique is invaluable when debugging large projects.
 
 ----
-# 📌 Understanding Git Branching
+# Branching_01_Understanding_Git_Branching
 
 ## 🔹 What is Branching?
 Branching allows us to diverge from the main line of work and work on something else in isolation. Conceptually, a branch is like a separate workspace.
