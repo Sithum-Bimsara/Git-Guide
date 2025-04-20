@@ -12,6 +12,11 @@
 - [11.Git_Tagging](#Git_Tagging)
 - [12.Git_Bisect_Finding_Bugs_Efficiently](#Git_Bisect_Finding_Bugs_Efficiently)
 - [13.Branching_01_Understanding_Git_Branching](#Branching_01_Understanding_Git_Branching)
+- [14.Branching_02_Basic](#Branching_02_Basic)
+- [15.Branching_03_Comparing_Branchesin_Git](#Branching_03_Comparing_Branchesin_Git)
+- [16.Branching_04_Git_Stash_Operations](#Branching_04_Git_Stash_Operations)
+- [17.Branching_05_Understanding_Git_Merging](#Branching_05_Understanding_Git_Merging)
+- [18.Branching_06_Fast_Forward_and_No_Fast_Forward_Merges](#Branching_06_Fast_Forward_and_No_Fast_Forward_Merges)
 
 
 # Git_The_Ultimate_Version_Control_System
@@ -1803,12 +1808,15 @@ Throughout this section, you will learn everything needed to work with Git branc
 
 ----
 
+
 ## Git Branch Management - Fixing a Bug 🐞
 
 ## Introduction 📌
 Git is a powerful tool for version control, and managing branches effectively is a crucial skill. In this guide, we will walk through the process of creating, switching, renaming, modifying, and deleting branches while fixing a bug. We will also examine the necessary Git commands and their outputs to ensure a smooth workflow.
 
 ---
+
+# Branching_02_Basic
 
 ## Creating a New Branch 🌱
 When we receive a bug report, the best practice is to create a new branch to isolate the fix. We do this using:
@@ -2017,7 +2025,8 @@ In this guide, we learned how to:
 This workflow helps us maintain a clean and organized Git history while preventing accidental commits to the wrong branch. 🚀
 
 ---
-# 📌 Comparing Branches in Git
+
+#  Branching_03_Comparing_Branchesin_Git
 
 ## 🧐 Introduction
 When working with Git, it's crucial to compare branches before merging them into the main branch (e.g., `master`). In this guide, we’ll explore various ways to check how a branch differs from `master` using Git commands. 
@@ -2119,7 +2128,7 @@ By using these commands, you can effectively review the changes in a branch befo
 
 ---
 
-# Git Stash Operations Explained 🚀
+# Branching_04_Git_Stash_Operations
 
 ## Introduction 📌
 When working with Git, sometimes we have local changes that we haven't committed yet, but we need to switch branches. Git prevents switching in such cases to avoid losing changes. In this guide, we will explore how to use Git Stash to temporarily save changes and retrieve them later.
@@ -2327,7 +2336,7 @@ Git Stash is a powerful tool that allows you to temporarily store changes and re
 
 ---
 
-# 🛠️ Understanding Git Merging: Fast Forward & Three-Way Merges
+# Branching_05_Understanding_Git_Merging
 
 Merging is the process of integrating changes from one branch into another. In Git, we have two types of merges:
 
@@ -2481,7 +2490,7 @@ Git looks at these three snapshots and decides how to combine them.
 
 ---
 
-# 📒 Git Notebook: Fast Forward & No Fast Forward Merges
+# Branching_06_Fast_Forward_and_No_Fast_Forward_Merges
 
 ## 📌 Introduction
 This notebook covers the concepts of **Fast Forward (FF) Merges** and **No Fast Forward (No-FF) Merges** in Git. We will explore how these merge strategies work, their advantages and disadvantages, and how to configure them.
