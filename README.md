@@ -17,6 +17,7 @@
 - [16.Branching_04_Git_Stash_Operations](#Branching_04_Git_Stash_Operations)
 - [17.Branching_05_Understanding_Git_Merging](#Branching_05_Understanding_Git_Merging)
 - [18.Branching_06_Fast_Forward_and_No_Fast_Forward_Merges](#Branching_06_Fast_Forward_and_No_Fast_Forward_Merges)
+- [19.Branching_07_Git_Three_Way_Merge](#Branching_07_Git_Three_Way_Merge)
 
 
 # Git_The_Ultimate_Version_Control_System
@@ -2635,7 +2636,7 @@ git config --global merge.ff no
 
 ---
 
-# 📖 Git Three-Way Merge: A Complete Walkthrough
+# Branching_07_Git_Three_Way_Merge
 
 ## 🎯 Introduction
 In this lesson, we'll explore the concept of a **three-way merge** in Git. This is useful when two branches have diverged, meaning they have independent changes that need to be merged back together.
